@@ -37,7 +37,6 @@ const Viewrestaurant = () => {
       .map((restaurant) => ({
         ...restaurant,
         placeInfo: placeData.find((place) => restaurant.place === place.placeId),
-        districtInfo: districtData.find((district) => restaurant.placeInfo.district === district.districtId ),
       }));
  
       setShowRestaurant(joinedData);
@@ -126,6 +125,7 @@ useEffect(() => {
             }
         </Select>
     </FormControl>
+
     <FormControl fullWidth style={{ borderRadius: '8px', marginLeft: '10px' }}>
         <InputLabel id="demo-simple-select-label">Place</InputLabel>
         <Select
