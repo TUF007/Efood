@@ -1,0 +1,15 @@
+.placecontainer{
+    width:100%;
+    height: 100vh;
+}
+.placepaper{
+    height: 250px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 180px;
+}
+.placsub{
+    height: 50px;;
+}

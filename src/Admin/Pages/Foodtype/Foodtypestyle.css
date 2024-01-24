@@ -1,0 +1,15 @@
+.foodtypecontainer{
+    width:100%;
+    min-height: 100vh;
+}
+.foodtypepaper{
+    height: 250px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 180px;
+}
+.foodtypesub{
+    height: 50px;;
+}

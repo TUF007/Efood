@@ -1,0 +1,15 @@
+.menucontainer{
+    width:100%;
+    min-height: 100vh;
+}
+.menupaper{
+    height: 250px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 180px;
+}
+.menusub{
+    height: 50px;;
+}

@@ -1,0 +1,33 @@
+.logcontainer{
+    width:100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logpaper{
+    height: 600px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.sigdiv{
+    margin-top:20px ;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.login{
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    align-items:center;   
+}
+.email{
+    width:100px;
+}
+.sigbutton{
+    
+     width: 52ch;
+}

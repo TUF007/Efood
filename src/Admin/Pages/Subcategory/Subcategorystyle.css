@@ -1,0 +1,15 @@
+.subcatcontainer{
+    width:100%;
+    height: 100vh;
+}
+.subcatpaper{
+    height: 250px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 180px;
+}
+.subcatsub{
+    height: 50px;;
+}

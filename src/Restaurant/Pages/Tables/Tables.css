@@ -1,0 +1,15 @@
+.tablecontainer{
+    width:100%;
+    min-height: 100vh;
+}
+.tablepaper{
+    height: 250px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 180px;
+}
+.tablesub{
+    height: 50px;;
+}
