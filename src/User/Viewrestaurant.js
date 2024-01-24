@@ -1,7 +1,8 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { db } from '../DB/Firebase';
-import { Avatar, Box, Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { Avatar, Box, Button, Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 const Viewrestaurant = () => {
   const [showrestaurant, setShowRestaurant] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -16,7 +17,7 @@ const Viewrestaurant = () => {
   const fetchRestaurant = async () => {
     const docSnap = await getDocs(query(collection(db, 'restaurant')));
     const docSnap1 = await getDocs(query(collection(db, 'place')));
-    const docSnap2 = await getDocs(query(collection(db,'district')))
+    const docSnap2 = await getDocs(query(collection(db, 'district')))
 
     if (docSnap.docs.length > 0 && docSnap1.docs.length > 0 && docSnap2.docs.length > 0) {
       const placeData = docSnap1.docs.map((doc) => ({
@@ -32,13 +33,13 @@ const Viewrestaurant = () => {
         ...doc.data(),
       }));
       const joinedData = restaurantData
-      .filter((restaurant) => placeData.some((place) => restaurant.place === place.placeId))
-      
-      .map((restaurant) => ({
-        ...restaurant,
-        placeInfo: placeData.find((place) => restaurant.place === place.placeId),
-      }));
- 
+        .filter((restaurant) => placeData.some((place) => restaurant.place === place.placeId))
+
+        .map((restaurant) => ({
+          ...restaurant,
+          placeInfo: placeData.find((place) => restaurant.place === place.placeId),
+        }));
+
       setShowRestaurant(joinedData);
       console.log(joinedData);
     } else {
@@ -62,120 +63,123 @@ const Viewrestaurant = () => {
     console.log(docSnap.docs[0].data());
 
     if (docSnap.docs.length > 0) {
-        const datadistrict = docSnap.docs.map((doc) => ({
-            propertyId: doc.id,
-            ...doc.data(),
-        }));
-        console.log(datadistrict);
-        setShowDistrict(datadistrict);
+      const datadistrict = docSnap.docs.map((doc) => ({
+        propertyId: doc.id,
+        ...doc.data(),
+      }));
+      console.log(datadistrict);
+      setShowDistrict(datadistrict);
     } else {
-        console.log('No such document!');
+      console.log('No such document!');
     }
 
 
 
-}
+  }
 
-const fetchPlace = async (id) => {
+  const fetchPlace = async (id) => {
     const placeDocs = await getDocs(query(collection(db, 'place'), where('district', '==', id)));
 
     if (placeDocs.docs.length > 0) {
-        const dataplace = placeDocs.docs.map((doc) => ({
-            propertyId: doc.id,
-            ...doc.data(),
-        }));
-        console.log(dataplace);
-        setShowPlace(dataplace);
+      const dataplace = placeDocs.docs.map((doc) => ({
+        propertyId: doc.id,
+        ...doc.data(),
+      }));
+      console.log(dataplace);
+      setShowPlace(dataplace);
     } else {
-        console.log('No such document!');
+      console.log('No such document!');
     }
 
 
 
-}
+  }
 
 
 
 
-useEffect(() => {
+  useEffect(() => {
 
 
     fetchDistrict()
-}, [])
+  }, [])
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-    <FormControl fullWidth style={{ borderRadius: '8px', marginRight: '10px' }}>
-        <InputLabel id="demo-simple-select-label">District</InputLabel>
-        <Select
+        <FormControl fullWidth style={{ borderRadius: '8px', marginRight: '10px' }}>
+          <InputLabel id="demo-simple-select-label">District</InputLabel>
+          <Select
             labelId="demo-simple-select-label"
             id="district-simple-select"
             value={district}
             label="District"
             onChange={(event) => {
-                fetchPlace(event.target.value)
-                setDistrict(event.target.value)
+              fetchPlace(event.target.value)
+              setDistrict(event.target.value)
             }}
             style={{ borderRadius: '8px' }}
-        >
+          >
             {
-                showdistrict.map((row, key) => (
-                    <MenuItem key={key} value={row.propertyId} >{row.district}</MenuItem>
-                ))
+              showdistrict.map((row, key) => (
+                <MenuItem key={key} value={row.propertyId} >{row.district}</MenuItem>
+              ))
             }
-        </Select>
-    </FormControl>
+          </Select>
+        </FormControl>
 
-    <FormControl fullWidth style={{ borderRadius: '8px', marginLeft: '10px' }}>
-        <InputLabel id="demo-simple-select-label">Place</InputLabel>
-        <Select
+        <FormControl fullWidth style={{ borderRadius: '8px', marginLeft: '10px' }}>
+          <InputLabel id="demo-simple-select-label">Place</InputLabel>
+          <Select
             labelId="demo-simple-select-label"
             id="place-simple-select"
             value={place}
             label="Place"
             onChange={(event) => { setPlace(event.target.value) }}
             style={{ borderRadius: '8px' }}
-        >
+          >
             {
-                showplace.map((row, key) => (
-                    <MenuItem key={key} value={row.propertyId} >{row.place}</MenuItem>
-                ))
+              showplace.map((row, key) => (
+                <MenuItem key={key} value={row.propertyId} >{row.place}</MenuItem>
+              ))
             }
-        </Select>
-    </FormControl>
-</div>
+          </Select>
+        </FormControl>
+      </div>
 
 
 
-    <Box
-      display="flex"
-      justifyContent="center"
-      marginTop="100px"
-    >
-      <Grid container spacing={3}>
-        {showrestaurant.map((row, key) => (
-          <Grid key={key + 1} item xs={12} sm={6} md={4}>
-            <Card style={{ marginBottom: '20px', width: '100%', height: '500px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
-              <CardContent>
-                <Avatar
-                  src={row.photo}
-                  style={{ width: '100%', height: '300px', marginBottom: '20px', borderRadius: '0' }}
-                />
-                <Typography variant="h5" component="div">
-                  {row.name}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                  {row.email}
-                </Typography>
-                <Typography color="textSecondary">
-                  Place: {row.placeInfo.place}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        marginTop="100px"
+      >
+        <Grid container spacing={3}>
+          {showrestaurant.map((row, key) => (
+            <Grid key={key + 1} item xs={12} sm={6} md={4}>
+              <Card style={{ marginBottom: '20px', width: '100%', height: '500px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
+                <CardContent>
+                  <Avatar
+                    src={row.photo}
+                    style={{ width: '100%', height: '300px', marginBottom: '20px', borderRadius: '0' }}
+                  />
+                  <Typography variant="h5" component="div">
+                    {row.name}
+                  </Typography>
+                  <Typography color="textSecondary" gutterBottom>
+                    {row.email}
+                  </Typography>
+                  <Typography color="textSecondary">
+                    Place: {row.placeInfo.place}
+                  </Typography>
+                </CardContent>
+                <Button variant="contained" style={{ marginLeft: '130px' }}>
+                  Book<RestaurantIcon />
+                </Button>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </>
 
   );
