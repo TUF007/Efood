@@ -86,11 +86,11 @@ const Comment = () => {
                 <>
                     <UserBox>
                         <Avatar
-                            src={row.photo}
+                            src={row.userInfo.photo}
                             sx={{ width: 30, height: 30 }}
                         />
                         <Typography fontWeight={500} variant="span">
-
+                        {row.userInfo.name}
                         </Typography>
                     </UserBox>
                     <Typography
