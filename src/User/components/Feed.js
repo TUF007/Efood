@@ -22,7 +22,7 @@ const Feed = () => {
       const postData = postDocs.docs.map((doc) => ({
         postId: doc.id,
         ...doc.data(),
-        postDate: doc.data().timestamp, // Replace 'timestamp' with the actual timestamp field in your post data
+        postDate: doc.data().timestamp, 
       }));
   
       const joinedData = postData

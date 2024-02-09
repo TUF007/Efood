@@ -2,6 +2,7 @@ import Sidebar from "./components/Sidebar";
 import Feed from "./components/Feed";
 import Rightbar from "./components/Rightbar";
 import Viewrestaurant from "./Viewrestaurant";
+import Comment from "./components/Comment";
 import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Add from "./components/Add";
@@ -26,6 +27,7 @@ function App() {
             <Routes>
               <Route path="/Viewrestaurant" element={<Viewrestaurant />} />
               <Route path="/" element={<Feed />} />
+              <Route path="/Comment" element={<Comment />} />
             </Routes>
           </Box>
           <Rightbar />
