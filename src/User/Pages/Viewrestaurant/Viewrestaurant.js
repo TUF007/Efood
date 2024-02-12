@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { db } from '../DB/Firebase';
+import { db } from '../../../DB/Firebase';
 import { Avatar, Box, Button, Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 const Viewrestaurant = () => {

@@ -1,11 +1,11 @@
-import Sidebar from "./components/Sidebar";
-import Feed from "./components/Feed";
-import Rightbar from "./components/Rightbar";
-import Viewrestaurant from "./Viewrestaurant";
-import Comment from "./components/Comment";
+import Sidebar from "./Components/Sidebar";
+import Feed from "./Components/Feed";
+import Rightbar from "./Components/Rightbar";
+import Viewrestaurant from "./Pages/Viewrestaurant/Viewrestaurant";
 import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
-import Navbar from "./components/Navbar";
-import Add from "./components/Add";
+import Navbar from "./Components/Navbar";
+import Add from "./Components/Add";
+import Comment from "./Components/Comment";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
@@ -27,7 +27,7 @@ function App() {
             <Routes>
               <Route path="/Viewrestaurant" element={<Viewrestaurant />} />
               <Route path="/" element={<Feed />} />
-              <Route path="/Comment" element={<Comment />} />
+              <Route path="/Comment" element={<Comment />} /> 
             </Routes>
           </Box>
           <Rightbar />
