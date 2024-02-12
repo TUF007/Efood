@@ -129,7 +129,7 @@ const District = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Sl. No.</TableCell>
-                    <TableCell>Restaurant</TableCell>
+                    <TableCell>District</TableCell>
                     <TableCell align='center' >Action</TableCell>
                   </TableRow>
                 </TableHead>

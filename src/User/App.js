@@ -6,6 +6,7 @@ import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
 import Navbar from "./Components/Navbar";
 import Add from "./Components/Add";
 import Comment from "./Components/Comment";
+import Complaint from "./Pages/Complaint/Complaint";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
@@ -28,6 +29,7 @@ function App() {
               <Route path="/Viewrestaurant" element={<Viewrestaurant />} />
               <Route path="/" element={<Feed />} />
               <Route path="/Comment" element={<Comment />} /> 
+              <Route path="/Complaint" element={<Complaint />} /> 
             </Routes>
           </Box>
           <Rightbar />
