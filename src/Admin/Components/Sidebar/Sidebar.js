@@ -23,7 +23,7 @@ const Siderbar = () => {
     <div className='sidebar'>
       <div className="top">
       <Avatar className='avatar' alt="Paimon Logo" src={image} />
-      <span className="logo">PAIMON</span>
+      <span className="logo">E-FOOD</span>
     </div>
         <hr />
         <div className="center">

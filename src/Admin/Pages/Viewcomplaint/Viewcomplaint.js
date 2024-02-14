@@ -6,28 +6,39 @@ import { Paper, Box,   Table, TableBody, TableCell, TableContainer, TableHead, T
 const Viewcomplaint = () => {
   const [showcomplaint, setShowcomplaint] = useState([]);
 
-  const fetchData = async () => {
-
+  const fetchComplaint = async () => {
     const docSnap = await getDocs(query(collection(db, 'complaint')));
-    if (docSnap.docs.length > 0) {
-      const data = docSnap.docs.map((doc) => ({
-        propertyId: doc.id,
+    const docSnap1 = await getDocs(query(collection(db,'user' )));
+
+ if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
+      const userData = docSnap1.docs.map((doc) => ({
+        userId: doc.id,
         ...doc.data(),
       }));
-      console.log(data);
-      setShowcomplaint(data);
+	 const ComplaintData = docSnap.docs.map((doc) => ({
+        ComplaintId: doc.id,
+        ...doc.data(),
+      }));
+    console.log(docSnap.docs[0].data());
+
+     const joinedData = ComplaintData
+    .filter((complaint) => userData.some((user) => complaint.userid === user.userId))
+    .map((complaint) => ({
+      ...complaint,
+      userInfo: userData.find((user) => complaint.userid === user.userId),
+    }));
+
+      console.log(joinedData);
+      setShowcomplaint(joinedData);
     } else {
       console.log('No such document!');
     }
 
-
-
-  }
-
+ }
   useEffect(() => {
 
 
-    fetchData()
+    fetchComplaint()
   }, [])
   return (
         <Box
@@ -42,6 +53,7 @@ const Viewcomplaint = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Sl. No.</TableCell>
+                    <TableCell>Name</TableCell>
                     <TableCell>Title</TableCell>
                     <TableCell>Complaint</TableCell>
                     <TableCell align='center' >Action</TableCell>
@@ -56,6 +68,7 @@ const Viewcomplaint = () => {
                       <TableCell component="th" scope="row">
                         {key + 1}
                       </TableCell>
+                      <TableCell>{row.userInfo.name}</TableCell>
                       <TableCell>{row.title}</TableCell>
                       <TableCell>{row.complaint}</TableCell>
                       <TableCell>reply</TableCell>
