@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { DarkModeContext } from "./Context/DarkModeContext";
 import Navbar from './Components/Navbar/Navbar'
 import Viewrestaurant from './Pages/Viewrestaurant/Viewrestaurant'
+import Viewcomplaint from './Pages/Viewcomplaint/Viewcomplaint'
 const App = () => {
   const { darkMode } = useContext(DarkModeContext);
   return (
@@ -29,6 +30,7 @@ const App = () => {
             <Route path='/Subcategory' element={<Subcategory />} />
             <Route path='/Foodtype' element={<Foodtype />} />
             <Route path='/viewrestaurant' element={<Viewrestaurant />} />
+            <Route path='/viewcomplaint' element={<Viewcomplaint />} />
           </Routes>
         </div>
       </div>
