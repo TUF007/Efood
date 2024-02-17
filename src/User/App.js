@@ -12,6 +12,7 @@ import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
+  const [search, setSearch] = useState('')
 
   const darkTheme = createTheme({
     palette: {
@@ -21,13 +22,13 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor={"background.default"} color={"text.primary"}>
-        <Navbar />
+        <Navbar setSearch={setSearch} />
         <Stack direction="row" spacing={2} justifyContent="space-between">
           <Sidebar setMode={setMode} mode={mode} />
           <Box flex={6} p={{ xs: 0, md: 2 }}>
             <Routes>
               <Route path="/Viewrestaurant" element={<Viewrestaurant />} />
-              <Route path="/" element={<Feed />} />
+              <Route path="/" element={<Feed search={search} />} />
               <Route path="/Comment" element={<Comment />} /> 
               <Route path="/Complaint" element={<Complaint />} /> 
             </Routes>

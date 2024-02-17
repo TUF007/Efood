@@ -3,28 +3,29 @@ import React, { useEffect, useState } from "react"
 import Post from "./Post"
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../DB/Firebase';
-const Feed = () => {
+const Feed = ({ search }) => {
+  console.log(search);
   const [loading, setLoading] = useState(true);
-  const [showpost, setShowPost] = useState([]);
+  const [showpost, setShowPost] = useState(null);
   setTimeout(() => {
     setLoading(false);
   }, [3000]);
   const fetchData = async () => {
     const postDocs = await getDocs(query(collection(db, 'post')));
     const userDocs = await getDocs(query(collection(db, 'user')));
-  
+
     if (userDocs.docs.length > 0 && postDocs.docs.length > 0) {
       const userData = userDocs.docs.map((doc) => ({
         userId: doc.id,
         ...doc.data(),
       }));
-  
+
       const postData = postDocs.docs.map((doc) => ({
         postId: doc.id,
         ...doc.data(),
-        postDate: doc.data().timestamp, 
+        postDate: doc.data().timestamp,
       }));
-  
+
       const joinedData = postData
         .filter((post) => userData.some((user) => post.userid === user.userId))
         .map((post) => ({
@@ -32,20 +33,24 @@ const Feed = () => {
           userInfo: userData.find((user) => post.userid === user.userId),
           timeAgo: getTimeDifference(post.date),
         }));
-  
+
       console.log(joinedData);
-      setShowPost(joinedData);
+      const filteredPosts = joinedData.filter((post) =>
+        post.title.toLowerCase().startsWith(search.toLowerCase())
+      );
+      console.log(filteredPosts);
+      setShowPost(filteredPosts);
     } else {
       console.log('No such document!');
     }
   }
-  
+
   function getTimeDifference(postDate) {
     const currentDate = new Date();
     const postTime = new Date(postDate);
-  
+
     const timeDifferenceInSeconds = Math.floor((currentDate - postTime) / 1000);
-  
+
     if (timeDifferenceInSeconds < 60) {
       return timeDifferenceInSeconds === 1 ? '1 second ago' : `${timeDifferenceInSeconds} seconds ago`;
     } else if (timeDifferenceInSeconds < 3600) {
@@ -67,15 +72,15 @@ const Feed = () => {
       const options = { year: 'numeric', month: 'short', day: 'numeric' };
       return postTime.toLocaleDateString(undefined, options);
     }
-}
+  }
 
-  
-  
+
+
   useEffect(() => {
 
 
     fetchData()
-  }, [])
+  }, [search])
   return (
     <Box>
       {loading ? (
@@ -87,9 +92,11 @@ const Feed = () => {
         </Stack>
       ) : (
         <>
-          {showpost.map((props, key) => (
-            <Post props={props} key={key} />
-          ))}
+          {
+            showpost &&
+            showpost.map((props, key) => (
+              <Post props={props} key={key} />
+            ))}
         </>
       )}
     </Box>

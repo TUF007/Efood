@@ -32,7 +32,7 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({setSearch}) => {
   const [open, setOpen] = useState(false);
   return (
     <AppBar position="sticky">
@@ -41,7 +41,7 @@ const Navbar = () => {
           E-FOOD
         </Typography>
         <Bento sx={{ display: { xs: "block", sm: "none" } }} />
-        <Search><InputBase placeholder='search...'></InputBase></Search>
+        <Search><InputBase placeholder='search...' onChange={(event) => setSearch(event.target.value)}></InputBase></Search>
         <Icons>
         <Badge badgeContent={4} color="error">
       <Mail  />

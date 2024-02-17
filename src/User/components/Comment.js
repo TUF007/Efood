@@ -63,67 +63,74 @@ const Comment = () => {
             mx="auto"
             my="auto"
             boxShadow={5}
-            overflowY="auto"
         >
+            <Box
+                sx={{
+                    overflowY: 'scroll', height: 500
+                }}>
 
-<Box
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Typography variant="h6" color="text.secondary">
-        Comments
-      </Typography>
-    </Box>
-            {showdetail.map((row, key) => (
-               <>
-               <Box
-                   display="flex"
-                   alignItems="center"
-                   justifyContent="flex-start"
-               >
-                   <Avatar src={row.userInfo.photo} sx={{ width: 30, height: 30 }} />
-                   <Typography fontWeight={500} variant="span" marginLeft={1}>
-                       {row.userInfo.name}
-                   </Typography>
-               </Box>
-           
-               <Box marginTop={1} marginLeft={5}>
-                   <Typography
-                       key={key}
-                       sx={{ width: '100%', maxHeight: '300px' }}
-                       variant="outlined"
-                       multiline
-                       maxRows={5}
-                       minRows={5}
-                   >
-                       {row.comment}
-                   </Typography>
-               </Box>
-           </>
-           
-            ))}
+                <Box
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
 
-<Box display="flex" alignItems="center" width="100%" paddingTop={25}>
-    <TextField
-        sx={{ width: 'calc(95% - 8px)',  mr: 2 }}
-        id="outlined-basic"
-        label="Content"
-        variant="outlined"
-        multiline
-        onChange={(event) => setComment(event.target.value)}
-    />
-    <Button
-        sx={{ width: '70px', height: '40px'  }}
-        variant="contained"
-        color="primary"
-        onClick={() => InsertData()}
-    >
-        Add
-    </Button>
-</Box>
+                    }}
+                >
+                    <Typography variant="h6" color="text.secondary">
+                        Comments
+                    </Typography>
+                </Box>
+                {showdetail.map((row, key) => (
+                    <>
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="flex-start"
+                        >
+                            <Avatar src={row.userInfo.photo} sx={{ width: 30, height: 30 }} />
+                            <Typography fontWeight={500} variant="span" marginLeft={1}>
+                                {row.userInfo.name}
+                            </Typography>
+                        </Box>
+
+                        <Box marginTop={1} marginLeft={5}>
+                            <Typography
+                                key={key}
+                                sx={{ width: '100%', maxHeight: '300px' }}
+                                variant="outlined"
+                                multiline
+                                maxRows={5}
+                                minRows={5}
+                            >
+                                {row.comment}
+                            </Typography>
+                        </Box>
+                    </>
+
+                ))}
+
+            </Box>
+
+
+            <Box display="flex" alignItems="flex-end" width="100%" sx={{mt:5}} >
+                <TextField
+                    sx={{ width: 'calc(95% - 8px)', mr: 2 }}
+                    id="outlined-basic"
+                    label="Content"
+                    variant="outlined"
+                    multiline
+                    onChange={(event) => setComment(event.target.value)}
+                />
+                <Button
+                    sx={{ width: '70px', height: '55px' }}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => InsertData()}
+                >
+                    Add
+                </Button>
+            </Box>
 
         </Box>
     );
