@@ -56,7 +56,7 @@ const Viewcomplaint = () => {
                     <TableCell>Name</TableCell>
                     <TableCell>Title</TableCell>
                     <TableCell>Complaint</TableCell>
-                    <TableCell align='center' >Action</TableCell>
+                    <TableCell>Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

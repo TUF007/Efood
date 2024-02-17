@@ -5,6 +5,7 @@ import { Mail, Notifications, Bento } from "@mui/icons-material";
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
+  backgroundColor:"#25d366",
 });
 
 const Search = styled("div")(({ theme }) => ({

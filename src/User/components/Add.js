@@ -1,10 +1,11 @@
 import { Avatar, Button, ButtonGroup, Fab, IconButton, Modal, Stack, styled, TextField, Tooltip, Typography, } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Add as AddIcon, DateRange, EmojiEmotions, Image, PersonAdd, VideoCameraBack, } from "@mui/icons-material";
+import { Add as AddIcon, DateRange,  } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../../DB/Firebase";
 import { addDoc, collection, doc, getDoc, Timestamp } from "firebase/firestore";
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 const SytledModal = styled(Modal)({
   display: "flex",
   alignItems: "center",
@@ -16,6 +17,7 @@ const UserBox = styled(Box)({
   alignItems: "center",
   gap: "10px",
   marginBottom: "20px",
+  
 });
 const Add = () => {
   const PostCollection = collection(db, 'post');
@@ -84,6 +86,7 @@ const Add = () => {
           position: "fixed",
           bottom: 20,
           left: { xs: "calc(50% - 25px)", md: 30 },
+          backgroundColor:"#128c7e",
         }}
       >
         <Fab color="primary" aria-label="add">
@@ -103,6 +106,7 @@ const Add = () => {
           color={"text.primary"}
           p={3}
           borderRadius={5}
+          
         >
           <Typography variant="h6" color="gray" textAlign="center">
             Create post
@@ -130,13 +134,10 @@ const Add = () => {
             minRows={10}
           />
           <Stack direction="row" gap={1} mt={2} mb={3}>
-            <EmojiEmotions color="primary" />
             <IconButton color="secondary" component="label" >
               <input type="file" style={{ display: 'none' }} onChange={handlePhotoSelect} />
-              <Image />
+              <FileUploadIcon/>
             </IconButton>
-            <VideoCameraBack color="success" />
-            <PersonAdd color="error" />
           </Stack>
           <ButtonGroup
             fullWidth
