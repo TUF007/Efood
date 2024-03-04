@@ -1,11 +1,12 @@
 import { AppBar, Avatar, Badge, Box, InputBase, Menu, MenuItem, styled,Toolbar, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { Mail, Notifications, Bento } from "@mui/icons-material";
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
-  backgroundColor:"#25d366",
 });
 
 const Search = styled("div")(({ theme }) => ({
@@ -33,8 +34,12 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Navbar = ({setSearch}) => {
+const Navbar = ({setSearch,setSearchRestaurant}) => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const shouldShowSearchBar = location.pathname !== '/User/Viewrestaurant';
+
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -42,8 +47,21 @@ const Navbar = ({setSearch}) => {
           E-FOOD
         </Typography>
         <Bento sx={{ display: { xs: "block", sm: "none" } }} />
-        <Search><InputBase placeholder='search...' onChange={(event) => setSearch(event.target.value)}></InputBase></Search>
-        <Icons>
+        {shouldShowSearchBar ? (
+          <Search>
+            <InputBase
+              placeholder='search...'
+              onChange={(event) => setSearch(event.target.value)}
+            />
+          </Search>
+        ):
+       ( <Search>
+        <InputBase
+          placeholder='search...'
+          onChange={(event) => setSearchRestaurant(event.target.value)}
+        />
+      </Search>)
+        }        <Icons>
         <Badge badgeContent={4} color="error">
       <Mail  />
     </Badge>

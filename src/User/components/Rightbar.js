@@ -3,8 +3,8 @@ import React from "react";
 
 const Rightbar = () => {
   return (
-    <Box flex={2} p={2} sx={{ display: { xs: "none", sm: "block", backgroundColor:"#d4f5de"} }}>
-      <Box position="fixed" width={350} display="flex" flexDirection="column" gap="10px">
+    <Box flex={2} p={2} sx={{ display: { xs: "none", sm: "block",backgroundColor:"#FBF9F1"} }}>
+      <Box position="fixed" width={350} display="flex" flexDirection="column" gap="10px" >
         <Typography variant="h6" fontWeight={100}>
           Online Friends
         </Typography>

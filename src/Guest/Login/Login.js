@@ -33,7 +33,7 @@ const Login = () => {
       }
       else if(docSnap2.exists() ){
         sessionStorage.setItem("rid",Id)
-        navigate('../../Restuarant')
+        navigate('../../Restaurant')
       }
       else {
         // docSnap.data() will be undefined in this case

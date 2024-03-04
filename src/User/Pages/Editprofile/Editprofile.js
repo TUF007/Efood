@@ -12,9 +12,8 @@ const Editprofile = () => {
          height:"600px",
         margin:"auto",
         marginTop:"40px",
-         backgroundColor:"#dcf8c6",
         border:"1px solid black", 
-         boxShadow:"5px",
+         boxShadow:"7px",
          borderRadius:"10px",  
 
     }}>
@@ -43,7 +42,7 @@ const Editprofile = () => {
           mt:"20px",
           justifyContent:"center",
         }}>
-        <Button variant="contained" sx={{width:"120px", height:"40px",borderRadius:"20px", backgroundColor:"#075e54", '&:hover': {backgroundColor: "#232D3F",transform: 'scale(1.05)' }}}>Save</Button>
+        <Button variant="contained" sx={{width:"120px", height:"40px",borderRadius:"20px", '&:hover': {backgroundColor: "darkblue",transform: 'scale(1.05)' }}}>Save</Button>
         </Box>
         </Box>
     </Box>

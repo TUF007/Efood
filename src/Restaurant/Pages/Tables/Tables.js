@@ -12,6 +12,7 @@ const Tables = () => {
   const [table, setTable] = useState('');
   const [showtable, setShowtable] = useState([]);
   const [updatetableID, setupdateTableID] = useState('');
+  const restid = sessionStorage.getItem('rid');
 
   useEffect(() => {
 
@@ -41,6 +42,7 @@ const Tables = () => {
   const InsertData = async (Id) => {
     const data = {
       table,
+      restaurant_id: restid,
     }
 
     if (Id) {

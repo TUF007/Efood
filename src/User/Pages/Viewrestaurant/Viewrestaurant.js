@@ -3,16 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../../DB/Firebase';
 import { Avatar, Box, Button, Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-const Viewrestaurant = () => {
+const Viewrestaurant = ({searchRestaurant}) => {
   const [showrestaurant, setShowRestaurant] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showdistrict, setShowDistrict] = useState([]);
   const [place, setPlace] = useState('');
   const [showplace, setShowPlace] = useState([]);
   const [district, setDistrict] = useState('');
-  useEffect(() => {
-    fetchRestaurant();
-  }, []);
 
   const fetchRestaurant = async () => {
     const docSnap = await getDocs(query(collection(db, 'restaurant')));
@@ -39,14 +36,88 @@ const Viewrestaurant = () => {
           ...restaurant,
           placeInfo: placeData.find((place) => restaurant.place === place.placeId),
         }));
+        console.log(joinedData);
 
-      setShowRestaurant(joinedData);
+        const filteredPosts = joinedData.filter((restaurant) =>
+        restaurant.name.toLowerCase().startsWith(searchRestaurant.toLowerCase())
+      );
+
+      setShowRestaurant(filteredPosts);
       console.log(joinedData);
     } else {
       console.log('No such document!');
     }
   };
 
+
+
+
+  const fetchRestaurantDistrict = async (Did) => {
+    const docSnap = await getDocs(query(collection(db, 'restaurant')));
+    const docSnap1 = await getDocs(query(collection(db, 'place')));
+  
+    if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
+      const restaurantData = docSnap.docs.map((doc) => ({
+        restaurantId: doc.id,
+        ...doc.data(),
+      }));
+  
+      const placeData = docSnap1.docs.map((doc) => ({
+        placeId: doc.id,
+        ...doc.data(),
+      }));
+  
+      const filteredData = restaurantData
+        .filter((restaurant) => {
+          const place = placeData.find(place => place.placeId === restaurant.place);
+          return place && place.district === Did;
+        })
+        .map((restaurant) => ({
+          ...restaurant,
+          placeInfo: {
+            ...placeData.find((place) => restaurant.place === place.placeId),
+          },
+        }));
+  
+      setShowRestaurant(filteredData);
+      console.log(filteredData);
+    } else {
+      console.log('No such document!');
+    }
+  };
+  
+
+  const fetchRestaurantPlace = async (placeId) => {
+    const docSnap = await getDocs(query(collection(db, 'restaurant')));
+    const docSnap1 = await getDocs(query(collection(db, 'place')));
+  
+    if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
+      const placeData = docSnap1.docs.map((doc) => ({
+        placeId: doc.id,
+        ...doc.data(),
+      }));
+      const restaurantData = docSnap.docs.map((doc) => ({
+        restaurantId: doc.id,
+        ...doc.data(),
+      }));
+  
+      const joinedData = restaurantData
+        .filter((restaurant) => placeData.some((place) => restaurant.place === place.placeId))
+        .filter((restaurant) => restaurant.place === placeId)
+        .map((restaurant) => ({
+          ...restaurant,
+          placeInfo: {
+            ...placeData.find((place) => restaurant.place === place.placeId),
+          },
+        }));
+  
+      setShowRestaurant(joinedData);
+      console.log(joinedData);
+    } else {
+      console.log('No such document!');
+    }
+  };
+  
   const handleSearch = () => {
     const filteredData = showrestaurant.filter(
       (restaurant) =>
@@ -100,9 +171,10 @@ const Viewrestaurant = () => {
 
   useEffect(() => {
 
+    fetchRestaurant();
 
     fetchDistrict()
-  }, [])
+  }, [searchRestaurant])
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -116,6 +188,7 @@ const Viewrestaurant = () => {
             onChange={(event) => {
               fetchPlace(event.target.value)
               setDistrict(event.target.value)
+              fetchRestaurantDistrict(event.target.value)
             }}
             style={{ borderRadius: '8px' }}
           >
@@ -134,7 +207,12 @@ const Viewrestaurant = () => {
             id="place-simple-select"
             value={place}
             label="Place"
-            onChange={(event) => { setPlace(event.target.value) }}
+            onChange={(event) => {
+               setPlace(event.target.value) 
+              fetchRestaurantPlace(event.target.value)
+
+
+            }}
             style={{ borderRadius: '8px' }}
           >
             {

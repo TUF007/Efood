@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Box, Button, TextField, Typography } from '@mui/material';
+import { Avatar, Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import { db } from '../../DB/Firebase';
-import { addDoc, collection, getDocs, query } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore';
+import DeleteIcon from '@mui/icons-material/Delete';
 
+const Comment = ({ postId }) => {
+    console.log(postId);
 
-const Comment = () => {
     const CommentCollection = collection(db, 'comment');
     const userid = sessionStorage.getItem('uid')
     const [comment, setComment] = useState('');
@@ -14,13 +16,16 @@ const Comment = () => {
 
         const data = {
             comment,
-            userid
+            userid,
+            postId,
         }
         const response = await addDoc(CommentCollection, data)
+        fetchcomment()
+
         console.log(response)
     }
     const fetchcomment = async () => {
-        const docSnap = await getDocs(query(collection(db, 'comment')));
+        const docSnap = await getDocs(query(collection(db, 'comment'), where('postId', '==', postId)));
         const docSnap1 = await getDocs(query(collection(db, 'user')));
 
         if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
@@ -44,29 +49,38 @@ const Comment = () => {
             console.log(joinedData);
             setShowDetail(joinedData);
         } else {
+            setShowDetail([]);
+
             console.log('No such document!');
         }
     };
+    const Deletedata = async (id) => {
 
+        await deleteDoc(doc(db, "comment", id));
+        fetchcomment()
+
+    }
     useEffect(() => {
 
         fetchcomment()
-    }, [])
+    },[])
     return (
         <Box
-            width={600}
-            height={600}
+            width={800}
+            height={650}
             bgcolor="white"
             color="text.primary"
             p={3}
-            borderRadius={5}
             mx="auto"
             my="auto"
-            boxShadow={5}
         >
+            <Typography variant="h6" color="text.secondary" style={{ textAlign: 'center' }}>
+                Comments
+            </Typography>
+
             <Box
                 sx={{
-                    overflowY: 'scroll', height: 500
+                    overflowY: 'scroll', height: 500,px:6
                 }}>
 
                 <Box
@@ -77,9 +91,7 @@ const Comment = () => {
 
                     }}
                 >
-                    <Typography variant="h6" color="text.secondary">
-                        Comments
-                    </Typography>
+
                 </Box>
                 {showdetail.map((row, key) => (
                     <>
@@ -94,7 +106,7 @@ const Comment = () => {
                             </Typography>
                         </Box>
 
-                        <Box marginTop={1} marginLeft={5}>
+                        <Box marginTop={1} marginLeft={5} sx={{display:'flex',justifyContent:'space-around'}}>
                             <Typography
                                 key={key}
                                 sx={{ width: '100%', maxHeight: '300px' }}
@@ -105,6 +117,12 @@ const Comment = () => {
                             >
                                 {row.comment}
                             </Typography>
+                            {
+                                row.userid === userid ? <IconButton aria-label="delete" onClick={() => Deletedata(row.commentId)}>
+                                    <DeleteIcon />
+                                </IconButton> : ''
+                            }
+
                         </Box>
                     </>
 
@@ -113,7 +131,7 @@ const Comment = () => {
             </Box>
 
 
-            <Box display="flex" alignItems="flex-end" width="100%" sx={{mt:5}} >
+            <Box display="flex" alignItems="flex-end" width="100%" sx={{ mt: 5 }} >
                 <TextField
                     sx={{ width: 'calc(95% - 8px)', mr: 2 }}
                     id="outlined-basic"
