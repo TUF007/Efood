@@ -62,6 +62,9 @@ const Deletedata = async(id) => {
   return (
     <>
       <Paper elevation={3} className='catcontainer'>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'blue', paddingTop: '50px' }}>
+      <h1>Category</h1>
+    </div>
 <div style={{display:'flex',justifyContent:'center'}}>
         <Paper elevation={6} className='catpaper' >
           <Box

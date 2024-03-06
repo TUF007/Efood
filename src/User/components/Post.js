@@ -158,7 +158,7 @@ const Post = ({ props }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-      <Typography>{count}</Typography>
+      
         <IconButton aria-label="add to favorites" onClick={() => InsertData(props.postId)}
         >
           {
@@ -168,6 +168,7 @@ const Post = ({ props }) => {
           }
 
         </IconButton>
+        <Typography>{count}</Typography>
         <IconButton aria-label="comment" onClick={handleCommentClick}>
           <CommentIcon />
         </IconButton>

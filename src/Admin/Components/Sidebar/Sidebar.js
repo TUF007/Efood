@@ -1,11 +1,6 @@
 import React from 'react'
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import StoreIcon from "@mui/icons-material/Store";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
@@ -16,6 +11,11 @@ import { DarkModeContext } from "../../Context/DarkModeContext";
 import { useContext } from "react";
 import { Avatar } from '@mui/material';
 import image from "../../Logo/paimon.jpg"
+import { Link } from 'react-router-dom';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import PlaceIcon from '@mui/icons-material/Place';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 const Siderbar = () => {
   const { dispatch } = useContext(DarkModeContext);
@@ -29,52 +29,62 @@ const Siderbar = () => {
         <div className="center">
         <ul>
           <p className="title">MAIN</p>
+          <Link to={'/Admin/'} style={{textDecoration:'none'}}>
           <li>
             <DashboardIcon className="icon" />
-            <span>Dashboard</span>
+            <span>Home Page </span>
           </li>
-          <p className="title">LISTS</p>
-            <li>
-              <PersonOutlineIcon className="icon" />
-              <span>Users</span>
-            </li>
-        
-            <li>
-              <StoreIcon className="icon" />
-              <span>Products</span>
-            </li>
-        
+          </Link>
+          <Link to={'/Admin/District'} style={{textDecoration:'none'}}>
           <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
+            <PlaceIcon  className="icon" />
+            <span>District </span>
           </li>
+          </Link>
+          <Link to={'/Admin/place'} style={{textDecoration:'none'}}>
           <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
+            <PlaceIcon  className="icon" />
+            <span>place </span>
           </li>
-          <p className="title">USEFUL</p>
+          </Link>
+          <p className="title">RESTAURANT</p>
+          <Link to={'/Admin/Viewrestaurant'} style={{textDecoration:'none'}}>
           <li>
-            <InsertChartIcon className="icon" />
-            <span>Stats</span>
+            <StorefrontIcon className="icon" />
+            <span>Restaurants </span>
+          </li>
+          </Link>
+          <Link to={'/Admin/foodtype'} style={{textDecoration:'none'}}>
+          <li>
+            <FastfoodIcon  className="icon" />
+            <span>Food type </span>
+          </li>
+          </Link>
+          <Link to={'/Admin/category'} style={{textDecoration:'none'}}>
+          <li>
+            <FastfoodIcon  className="icon" />
+            <span>Category </span>
+          </li>
+          </Link>
+          <p className="title">USER</p>
+          <li>
+            <CheckBoxOutlineBlankIcon className="icon" />
+            <span>Posts</span>
           </li>
           <li>
             <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
+            <span>Reports</span>
           </li>
-          <p className="title">SERVICE</p>
+          <p className="title">REPORTS</p>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>System Health</span>
+            <span>Complaints</span>
           </li>
           <li>
             <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
+            <span>Feedbacks</span>
           </li>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
-          </li>
-          <p className="title">USER</p>
+          <p className="title">SELF</p>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
@@ -85,7 +95,7 @@ const Siderbar = () => {
           </li>
         </ul>
       </div>
-      <div className="bottom">
+      {/* <div className="bottom">
         <div
           className="colorOption"
           onClick={() => dispatch({ type: "LIGHT" })}
@@ -94,7 +104,7 @@ const Siderbar = () => {
           className="colorOption"
           onClick={() => dispatch({ type: "DARK" })}
         ></div>
-      </div>
+      </div> */}
     </div>
   )
 }

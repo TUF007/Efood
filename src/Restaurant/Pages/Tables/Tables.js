@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "./Tables.css";
-import { db } from '../../../DB/Firebase';
+import { db, storage } from '../../../DB/Firebase';
 import { collection, addDoc, query, getDocs, deleteDoc, doc, updateDoc, getDoc } from 'firebase/firestore'
-import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material/';
-
+import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Avatar, FormControl } from '@mui/material/';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import styled from 'styled-components';
 
 const Tables = () => {
 
@@ -13,6 +15,7 @@ const Tables = () => {
   const [showtable, setShowtable] = useState([]);
   const [updatetableID, setupdateTableID] = useState('');
   const restid = sessionStorage.getItem('rid');
+  const [photo, setPhoto] = useState([]);
 
   useEffect(() => {
 
@@ -20,7 +23,18 @@ const Tables = () => {
     fetchData()
   }, [])
 
-
+  const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
+ 
   const fetchData = async () => {
 
     const docSnap = await getDocs(query(collection(db, 'table')));
@@ -38,11 +52,26 @@ const Tables = () => {
 
 
   }
-
+  const handlePhotoSelect = (event) => {
+    const file = event.target.files[0];
+    setPhoto(file);
+    console.log(file);
+  };
   const InsertData = async (Id) => {
+    
+    const metadata = {
+      contentType: 'image/jpeg'
+    };
+  
+    const storageRef = ref(storage, 'Restaurant/Tables/' + photo.name);
+    await uploadBytesResumable(storageRef, photo, metadata);
+    const url = await getDownloadURL(storageRef).then((downloadURL) => {
+      return downloadURL
+    });
     const data = {
       table,
       restaurant_id: restid,
+      photo: url,
     }
 
     if (Id) {
@@ -97,7 +126,7 @@ const Tables = () => {
   return (
     <>
       <Paper elevation={3} className='tablecontainer'>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center',alignItems:'center' }}>
           <Paper elevation={6} className='tablepaper' >
             <Box
               component="form"
@@ -107,14 +136,22 @@ const Tables = () => {
               noValidate
               autoComplete="off"
             >
-              <div style={{ marginRight: '25px' }}>
-                <TextField id="outlined-basic" label="Table" variant="outlined" value={table} onChange={(event) => setTable(event.target.value)} />
+              <div>
+              <FormControl fullWidth >
+                <TextField id="outlined-basic" label="Table" variant="outlined"  className='tablenumber' value={table} onChange={(event) => setTable(event.target.value)} />
+             </FormControl>
               </div>
 
             </Box>
             <div>
+            <Button component="label" variant="contained" className="tablebutton" startIcon={<CloudUploadIcon />} >
+              Upload Table Photo
+              <VisuallyHiddenInput type="file" onChange={handlePhotoSelect} />
+            </Button>
+          </div>
+            <div>
               <Stack direction="row" spacing={2}>
-                <Button variant="contained" style={{ marginRight: '43px' }} className='tablesub' onClick={() => InsertData(updatetableID)}>submit</Button>
+                <Button variant="contained" className='tablesub' onClick={() => InsertData(updatetableID)}>submit</Button>
               </Stack>
             </div>
           </Paper >
@@ -132,6 +169,7 @@ const Tables = () => {
                   <TableRow>
                     <TableCell>Sl. No.</TableCell>
                     <TableCell>table</TableCell>
+                    <TableCell>Photo</TableCell>
                     <TableCell align='center' >Action</TableCell>
                   </TableRow>
                 </TableHead>
@@ -145,6 +183,7 @@ const Tables = () => {
                         {key + 1}
                       </TableCell>
                       <TableCell>{row.table}</TableCell>
+                      <TableCell><Avatar src={row.photo}/></TableCell>
                       <TableCell align='center' ><Button onClick={() => Deletedata(row.propertyId)}>Delete</Button>
                         <Button onClick={() => fetchUpdatedata(row.propertyId)}>Update</Button></TableCell>
                     </TableRow>

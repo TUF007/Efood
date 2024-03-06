@@ -1,0 +1,46 @@
+.foodcontainer{
+    width:100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.foodpaper{
+    margin-top: 20px;
+    height: 600px;
+    width: 650px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-top: 40px;
+}
+.sig1div{
+    margin-top:20px ;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.catselect{
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 97%;
+    margin-left: 7px;   
+}
+.typeselect{
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items:center; 
+    width: 97%;
+    margin-left: 7px; 
+}
+.price{
+    padding-top: 20px; 
+}
+.photobutton
+{
+    width: 97%;
+}

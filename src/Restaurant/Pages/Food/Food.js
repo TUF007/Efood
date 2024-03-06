@@ -18,6 +18,7 @@ const Food = () => {
   const [showcategory, setShowcategory] = useState([]);
   const [showtype, setShowtype] = useState([]);
   const [showfood, setShowfood] = useState([]);
+  const restid = sessionStorage.getItem('rid');
 
   const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -59,6 +60,7 @@ const Food = () => {
       category,
       type,
       foodprice,
+      restaurantId: restid,
 
     }
     const response = await addDoc(FoodCollection, data)
@@ -295,7 +297,7 @@ const Food = () => {
                         </TableCell>
                         <TableCell>{row.name}</TableCell>
                         <TableCell>{row.description}</TableCell>
-                        <TableCell><Avatar>{row.photo}</Avatar></TableCell>
+                        <TableCell><Avatar src={row.photo}/></TableCell>
                         <TableCell>{row.categoryInfo.category}</TableCell>
                         <TableCell>{row.typeInfo.foodtype}</TableCell>
                         <TableCell>{row.foodprice}</TableCell>

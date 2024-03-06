@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../../DB/Firebase';
 import { Avatar, Box, Button, Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import { Link } from 'react-router-dom';
 const Viewrestaurant = ({searchRestaurant}) => {
   const [showrestaurant, setShowRestaurant] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -250,9 +251,12 @@ const Viewrestaurant = ({searchRestaurant}) => {
                     Place: {row.placeInfo.place}
                   </Typography>
                 </CardContent>
+                <Link to={`/User/ViewTable/${row.restaurantId}`} >
+
                 <Button variant="contained" style={{ marginLeft: '130px' }}>
                   Book<RestaurantIcon />
                 </Button>
+                </Link>
               </Card>
             </Grid>
           ))}

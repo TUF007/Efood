@@ -1,8 +1,9 @@
-import { AccountBox, Article, Group, Home, ModeNight, Person, Settings, Storefront, } from "@mui/icons-material";
+import { AccountBox, Home, ModeNight, Person, Settings, Storefront, } from "@mui/icons-material";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch, } from "@mui/material";
 import React from 'react'
 import { Link } from "react-router-dom";
 import PasswordIcon from '@mui/icons-material/Password';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const Sidebar = ({ mode, setMode }) => {
   return (
     <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block", backgroundColor: "#FBF9F1" } }}
@@ -20,44 +21,14 @@ const Sidebar = ({ mode, setMode }) => {
             </Link>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Article />
-              </ListItemIcon>
-              <ListItemText primary="Pages" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Group />
-              </ListItemIcon>
-              <ListItemText primary="Groups" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Storefront />
-              </ListItemIcon>
-              <ListItemText primary="Marketplace" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Person />
-              </ListItemIcon>
-              <ListItemText primary="Friends" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Settings />
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItemButton>
+            <Link to="/User/Viewrestaurant" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Storefront />
+                </ListItemIcon>
+                <ListItemText primary="Restaurants" />
+              </ListItemButton>
+            </Link>
           </ListItem>
           <ListItem disablePadding>
             <Link to="/User/Myprofile" style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -70,23 +41,33 @@ const Sidebar = ({ mode, setMode }) => {
             </Link>
           </ListItem>
           <ListItem disablePadding>
+            <Link to="/User/VeiwCart" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItemButton>
+                <ListItemIcon>
+                  < ShoppingCartIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Cart" />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+          <ListItem disablePadding>
             <Link to="/User/Changepassword" style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemButton>
                 <ListItemIcon>
                   < PasswordIcon/>
                 </ListItemIcon>
-                <ListItemText primary=" Change Password" />
+                <ListItemText primary="Password" />
               </ListItemButton>
             </Link>
           </ListItem>
-          <ListItem disablePadding>
+          {/* <ListItem disablePadding>
             <ListItemButton component="a" href="#simple-list">
               <ListItemIcon>
                 <ModeNight />
               </ListItemIcon>
               <Switch onChange={e => setMode(mode === "light" ? "dark" : "light")} />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
         </List>
       </Box>
 

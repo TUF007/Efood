@@ -30,7 +30,7 @@ const Siderbar = () => {
           <Link to={'/Restaurant/Home'} style={{textDecoration:'none'}}>
 
             <li>
-              <DashboardIcon className="icon1" />
+              <DashboardIcon className="icon" />
               <span>Dashboard</span>
             </li>
           </Link>
@@ -43,27 +43,27 @@ const Siderbar = () => {
           </Link>
           <Link to={'/Restaurant/Menu'} style={{textDecoration:'none'}}>
           <li>
-            <RestaurantMenuIcon className="icon1" />
+            <RestaurantMenuIcon className="icon" />
             <span>Menu</span>
           </li>
           </Link>
           <Link to={'/Restaurant/Tables'} style={{textDecoration:'none'}}>
           <li>
-            <TableBarIcon  className="icon1" />
+            <TableBarIcon  className="icon" />
             <span>Tables</span>
           </li>
           </Link>
           <li>
-            <LocalShippingIcon className="icon1" />
+            <LocalShippingIcon className="icon" />
             <span>Delivery</span>
           </li>
           <p className="title1">USEFUL</p>
           <li>
-            <InsertChartIcon className="icon1" />
+            <InsertChartIcon className="icon" />
             <span>Stats</span>
           </li>
           <li>
-            <NotificationsNoneIcon className="icon1" />
+            <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
           </li>
           <p className="title1">SERVICE</p>

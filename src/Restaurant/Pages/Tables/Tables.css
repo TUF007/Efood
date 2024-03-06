@@ -3,13 +3,21 @@
     min-height: 100vh;
 }
 .tablepaper{
-    height: 250px;
-    width: 400px;
+    height: 350px;
+    width: 600px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 180px;
 }
 .tablesub{
+    margin-bottom: 160px;
     height: 50px;;
+}
+.tablebutton{
+width: 100%;
+}
+.tablenumber{
+    width: 100%;
 }

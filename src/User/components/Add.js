@@ -86,6 +86,7 @@ const Add = () => {
           position: "fixed",
           bottom: 20,
           left: { xs: "calc(50% - 25px)", md: 30 },
+          bgcolor:"#120D31"
         }}
       >
         <Fab color="primary" aria-label="add">
