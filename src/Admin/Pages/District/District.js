@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./Districtstyle.css";
 import {db} from '../../../DB/Firebase';
 import { collection, addDoc, query, getDocs, deleteDoc, doc, updateDoc, getDoc } from 'firebase/firestore'
-import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material/';
+import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material/';
 
 
 const District = () => {
@@ -94,7 +94,12 @@ const District = () => {
 
   return (
     <>
-      <Paper elevation={3} className='distcontainer'>
+    <Box className='distcontainer'>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
+        District
+      </Typography>
+    </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Paper elevation={6} className='distpaper' >
             <Box
@@ -152,9 +157,7 @@ const District = () => {
             </TableContainer>
           </Paper>
         </Box>
-
-      </Paper>
-
+        </Box>
     </>
   )
 }

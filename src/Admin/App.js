@@ -7,17 +7,14 @@ import Subcategory from './Pages/Place/Place'
 import Foodtype from './Pages/Foodtype/Foodtype'
 import Sidebar from './Components/Sidebar/Sidebar'
 import { Route, Routes } from 'react-router-dom'
-import "./Style/dark.css";
 import "../Admin/Pages/Home/Home.css"
-import { useContext } from "react";
-import { DarkModeContext } from "./Context/DarkModeContext";
 import Navbar from './Components/Navbar/Navbar'
 import Viewrestaurant from './Pages/Viewrestaurant/Viewrestaurant'
 import Viewcomplaint from './Pages/Viewcomplaint/Viewcomplaint'
 const App = () => {
-  const { darkMode } = useContext(DarkModeContext);
+ 
   return (
-    <div className={darkMode ? "app dark" : "app"}>
+    <div className={ "app"}>
       <div className="home">
         <Sidebar />
         <div className="homeContainer">

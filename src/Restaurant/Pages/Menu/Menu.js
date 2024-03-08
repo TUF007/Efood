@@ -94,7 +94,7 @@ const Menu = () => {
 
   return (
     <>
-      <Paper elevation={3} className='menucontainer'>
+      <Box className='menucontainer'>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Paper elevation={6} className='menupaper' >
             <Box
@@ -153,7 +153,7 @@ const Menu = () => {
           </Paper>
         </Box>
 
-      </Paper>
+      </Box>
 
     </>
   )

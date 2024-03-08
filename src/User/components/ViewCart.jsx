@@ -3,14 +3,27 @@ import React, { useEffect, useState } from 'react'
 import { db } from "../../DB/Firebase";
 import { collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { Avatar, Box, Button, Card, IconButton, Typography, } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import CloseIcon from '@mui/icons-material/Close';
 import CartCard from './CartCard';
+
+import dayjs from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { Await, Link } from 'react-router-dom';
+
 const ViewCart = () => {
 
+    const today = dayjs();
+    const yesterday = dayjs().subtract(1, 'day');
+    const todayStartOfTheDay = today.startOf('day');
 
     const [CardData, setCartData] = useState([])
+    const [check, setCheck] = useState(false)
+    const [dateVisit, setDateVisit] = useState('')
+    const [timeVist, setTimeVisit] = useState('')
+
 
     const Uid = sessionStorage.getItem('uid')
 
@@ -27,6 +40,7 @@ const ViewCart = () => {
             // If an existing booking is found, get its bookingId
             const existingBooking = existingBookingSnapshot.docs[0];
             const bookingId = existingBooking.id;
+
 
             // Fetch all food items associated with the bookingId
             const cartQuery = query(CartCollection, where('bookingId', '==', bookingId));
@@ -60,7 +74,7 @@ const ViewCart = () => {
             setCartData(resolvedFoodItems)
             console.log(resolvedFoodItems);
 
-            
+
             // return resolvedFoodItems.filter(item => item !== null); // Filter out null values
         } else {
             console.log("No booking with status 0 found");
@@ -69,9 +83,53 @@ const ViewCart = () => {
     }
 
     // const  handleCheckOut = () => {
-        
+
     // }
-    
+
+
+    const addDateAndTime = async () => {
+        const docRef = doc(db, 'booking');
+      
+        try {
+          const docSnap = await getDoc(docRef);
+      
+          if (docSnap.exists()) {
+            const data = {
+              propertyId: docSnap.id,
+              ...docSnap.data(),
+            };
+            console.log(data);
+            
+            // Add date and time to the data
+            const currentDate = new Date();
+      
+            // Format date and time as needed
+            const dateVisit = currentDate.toISOString().split('T')[0];
+            const timeVisit = currentDate.toISOString().split('T')[1].slice(0, 5);
+      
+            const updatedData = {
+              ...data,
+              dateVisit,
+              timeVisit,
+              status: 1,
+            };
+      
+            console.log(updatedData);
+      
+            // Update the document with new data
+            await updateDoc(docRef, updatedData);
+      
+            // Set state with the new values
+            setDateVisit(dateVisit);
+            setTimeVisit(timeVisit);
+          } else {
+            console.log('No such document!');
+          }
+        } catch (error) {
+          console.error('Error updating document:', error);
+        }
+      };
+      
 
 
     useEffect(() => {
@@ -85,13 +143,65 @@ const ViewCart = () => {
             </Typography>
             {
                 CardData.map((data, key) => (
-                   <CartCard data={data} key={key} fetchFoodForBooking={fetchFoodForBooking}/>
+                    <CartCard data={data} key={key} fetchFoodForBooking={fetchFoodForBooking} />
                 ))
             }
             <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 3 }}>
-                <Typography>Total {}</Typography>
-                <Button size='large' sx={{ px: 3 }} variant='contained'>Place Order</Button>
+                <Typography>Total { }</Typography>
+                {!check && <Button size='large' sx={{ px: 3 }} onClick={() => setCheck(!check)} variant='contained'>Continue</Button>}
             </Box>
+
+
+
+            {check && (
+                <>
+                    <Box sx={{ height: "400px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoContainer
+                                components={[
+                                    'DatePicker',
+                                    'DateTimePicker',
+                                    'TimePicker',
+                                    'DateRangePicker',
+                                ]}
+                            >
+                                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+                                    <div style={{ marginTop: "30px" }}>
+                                        <DemoItem label="Date">
+                                            <DatePicker
+                                                sx={{ width: "450px" }}
+                                                defaultValue={yesterday}
+                                                disablePast
+                                                views={['year', 'month', 'day']}
+                                                onChange={(event) => setDateVisit(event.format('DD-MM-YYYY'))}
+                                            />
+                                        </DemoItem>
+                                    </div>
+                                    <div style={{ marginTop: "30px" }}>
+                                        <DemoItem label="Time">
+                                            <TimePicker
+                                                sx={{ width: "450px" }}
+                                                defaultValue={todayStartOfTheDay} disablePast
+                                                onChange={(event) => setTimeVisit(event.format('HH:mm:ss'))}
+
+                                            />
+
+                                        </DemoItem>
+                                    </div>
+
+                                </div>
+                            </DemoContainer>
+                        </LocalizationProvider>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <Link to={'/User/Payment'}>
+
+                            <Button size='large' sx={{ px: 3, m: 3 }} variant='contained'>Place Order</Button>
+                        </Link>
+                    </Box>
+                </>)}
+
         </Card>
     )
 }

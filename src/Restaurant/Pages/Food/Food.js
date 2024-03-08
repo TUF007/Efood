@@ -166,7 +166,7 @@ const Food = () => {
   return (
     (
       <>
-        <Paper elevation={3} className='foodcontainer'>
+        <Box className='foodcontainer'>
           <Paper elevation={6} className='foodpaper' >
 
             <Box
@@ -309,7 +309,7 @@ const Food = () => {
               </TableContainer>
             </Paper>
           </Box>
-        </Paper>
+        </Box>
       </>
     )
   )

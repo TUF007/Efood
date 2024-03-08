@@ -14,10 +14,10 @@ import Myprofile from "./Pages/Myprofile/Myprofile";
 import Changepassword from "./Pages/ChangePassword/Changepassword"
 import ViewTable from "./Pages/ViewTable/ViewTable";
 import ViewMenu from "./Pages/ViewMenu/ViewMenu";
-
 import { db } from "../DB/Firebase";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import ViewCart from "./Components/ViewCart";
+import Payment from "./Pages/Payment/Payment";
 
 
 function App() {
@@ -99,6 +99,7 @@ function App() {
               <Route path="/ViewTable/:Id" element={<ViewTable />} /> 
               <Route path="/ViewMenu" element={<ViewMenu  fetchFoodForBooking={fetchFoodForBooking}/>} /> 
               <Route path="/ViewCart" element={<ViewCart  />} /> 
+              <Route path="/Payment" element={<Payment />} /> 
             </Routes>
           </Box>
           {

@@ -1,14 +1,11 @@
 import React from 'react'
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import InsertChartIcon from "@mui/icons-material/InsertChart";
+import MailIcon from '@mui/icons-material/Mail';
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
+import FeedbackIcon from '@mui/icons-material/Feedback';
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import "./Sidebar.css";
-import { DarkModeContext } from "../../Context/DarkModeContext";
-import { useContext } from "react";
 import { Avatar } from '@mui/material';
 import image from "../../Logo/paimon.jpg"
 import { Link } from 'react-router-dom';
@@ -18,7 +15,6 @@ import FastfoodIcon from '@mui/icons-material/Fastfood';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 const Siderbar = () => {
-  const { dispatch } = useContext(DarkModeContext);
   return (
     <div className='sidebar'>
       <div className="top">
@@ -76,12 +72,14 @@ const Siderbar = () => {
             <span>Reports</span>
           </li>
           <p className="title">REPORTS</p>
+          <Link to={'/Admin/Viewcomplaint'} style={{textDecoration:'none'}}>
           <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>Complaints</span>
+            <MailIcon  className="icon" />
+            <span>Compliants </span>
           </li>
+          </Link>
           <li>
-            <PsychologyOutlinedIcon className="icon" />
+            <FeedbackIcon className="icon" />
             <span>Feedbacks</span>
           </li>
           <p className="title">SELF</p>

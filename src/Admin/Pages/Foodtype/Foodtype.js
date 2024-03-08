@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./Foodtypestyle.css";
 import { db } from '../../../DB/Firebase';
 import { collection, addDoc, query, getDocs, deleteDoc, doc, updateDoc, getDoc } from 'firebase/firestore'
-import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material/';
+import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material/';
 
 
 const Foodtype = () => {
@@ -93,7 +93,12 @@ const Foodtype = () => {
 
     return (
         <>
-        <Paper elevation={3} className='foodtypecontainer'>
+        <Box className='foodtypecontainer'>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
+        Food Type
+      </Typography>
+    </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Paper elevation={6} className='foodtypepaper' >
               <Box
@@ -151,8 +156,8 @@ const Foodtype = () => {
               </TableContainer>
             </Paper>
           </Box>
-  
-        </Paper>
+          </Box>
+        
   
       </>
     )

@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from '@mui/material'
-import { addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { doc, getDoc,updateDoc} from 'firebase/firestore';
 import React, { useState } from 'react'
 import { db } from '../../../DB/Firebase';
 

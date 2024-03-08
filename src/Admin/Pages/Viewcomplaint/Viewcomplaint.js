@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { db } from '../../../DB/Firebase';
 import { collection,  query, getDocs} from 'firebase/firestore'
-import { Paper, Box,   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,} from '@mui/material/';
+import { Paper, Box,   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography,} from '@mui/material/';
 
 const Viewcomplaint = () => {
   const [showcomplaint, setShowcomplaint] = useState([]);
@@ -41,6 +41,12 @@ const Viewcomplaint = () => {
     fetchComplaint()
   }, [])
   return (
+    <>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
+        Complaints
+      </Typography>
+    </div>
         <Box
           display="flex"
           justifyContent="center"
@@ -79,6 +85,7 @@ const Viewcomplaint = () => {
             </TableContainer>
           </Paper>
         </Box>
+        </>
   )
 }
 

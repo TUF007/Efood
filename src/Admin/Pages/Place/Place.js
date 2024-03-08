@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./Placestyle.css";
 import {db} from '../../../DB/Firebase'
 import { collection, addDoc, getDocs, query, doc, deleteDoc } from 'firebase/firestore'
-import { Paper, Box, TextField, Button, Stack, InputLabel, FormControl, Select, MenuItem, TableContainer, TableCell, Table, TableHead, TableRow, TableBody } from '@mui/material/';
+import { Paper, Box, TextField, Button, Stack, InputLabel, FormControl, Select, MenuItem, TableContainer, TableCell, Table, TableHead, TableRow, TableBody, Typography } from '@mui/material/';
 
 const Place = () => {
   const PlaceCollection = collection(db, 'place');
@@ -90,7 +90,13 @@ const Place = () => {
   }
 
   return (
-    <Paper elevation={3} className='placecontainer'>
+    <>
+     <Box className='placecontainer'>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
+        Place
+      </Typography>
+    </div>
       <div style={{display:'flex',justifyContent:'center'}}>
       <Paper elevation={6} className='placepaper' >
         <Box
@@ -122,7 +128,7 @@ const Place = () => {
             </Select>
           </FormControl>
           <div style={{ marginRight: '25px' }} >
-          <TextField id="outlined-place" label="Place" variant="outlined" onChange={(event) => setPlace(event.target.value)} />
+          <TextField sx={{width:"100%"}} id="outlined-place" label="Place" variant="outlined" onChange={(event) => setPlace(event.target.value)} />
          </div>  
         </Box>
         <div>     
@@ -168,8 +174,8 @@ const Place = () => {
           </TableContainer>
         </Paper>
       </Box>
-
-    </Paper>
+  </Box>
+</>
 
 
   )

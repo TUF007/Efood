@@ -1,10 +1,10 @@
-import { AccountBox, Home, ModeNight, Person, Settings, Storefront, } from "@mui/icons-material";
+import { AccountBox, Home, Storefront, } from "@mui/icons-material";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch, } from "@mui/material";
 import React from 'react'
 import { Link } from "react-router-dom";
 import PasswordIcon from '@mui/icons-material/Password';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-const Sidebar = ({ mode, setMode }) => {
+const Sidebar = () => {
   return (
     <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block", backgroundColor: "#FBF9F1" } }}
     >
@@ -41,7 +41,7 @@ const Sidebar = ({ mode, setMode }) => {
             </Link>
           </ListItem>
           <ListItem disablePadding>
-            <Link to="/User/VeiwCart" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to="/User/ViewCart" style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemButton>
                 <ListItemIcon>
                   < ShoppingCartIcon/>

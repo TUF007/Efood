@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./Categorystyle.css";
 import {db} from '../../../DB/Firebase';
 import { collection, addDoc, query, getDocs, deleteDoc, doc } from 'firebase/firestore'
-import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material/';
+import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material/';
 
 
 const Category = () => {
@@ -61,9 +61,11 @@ const Deletedata = async(id) => {
 
   return (
     <>
-      <Paper elevation={3} className='catcontainer'>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'blue', paddingTop: '50px' }}>
-      <h1>Category</h1>
+     <Box className='catcontainer'>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
+        Category
+      </Typography>
     </div>
 <div style={{display:'flex',justifyContent:'center'}}>
         <Paper elevation={6} className='catpaper' >
@@ -121,8 +123,8 @@ const Deletedata = async(id) => {
             </TableContainer>
           </Paper>
         </Box>
-
-      </Paper>
+        </Box>
+      
 
     </>
   )

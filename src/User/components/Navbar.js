@@ -1,6 +1,6 @@
-import { AppBar, Avatar, Badge, Box, InputBase, Menu, MenuItem, styled, Toolbar, Typography } from '@mui/material'
+import { AppBar, Avatar,  Box, InputBase, Menu, MenuItem, styled, Toolbar, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { Mail, Notifications, Bento } from "@mui/icons-material";
+import { Bento } from "@mui/icons-material";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 

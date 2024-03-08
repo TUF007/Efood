@@ -1,7 +1,7 @@
 import { collection, deleteDoc, doc, getDocs, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { db } from '../../../DB/Firebase';
-import { Avatar, Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Avatar, Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 const Viewrestaurant = () => {
 
   const [showrestaurant, setShowRestaurant] = useState([]);
@@ -49,6 +49,12 @@ const Viewrestaurant = () => {
 }
 
   return (
+    <>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
+        Restaurants
+      </Typography>
+    </div>
    <Box
           display="flex"
           justifyContent="center"
@@ -89,6 +95,7 @@ const Viewrestaurant = () => {
             </TableContainer>
           </Paper>
         </Box>
+        </>
   )
 }
 

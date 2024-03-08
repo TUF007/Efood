@@ -37,7 +37,7 @@ const Siderbar = () => {
           <p className="title1"></p>
           <Link to={'/Restaurant/Food'} style={{textDecoration:'none'}}>
           <li>
-            <FastfoodIcon className="icon1" />
+            <FastfoodIcon className="icon" />
             <span>Food</span>
           </li>
           </Link>
@@ -57,7 +57,7 @@ const Siderbar = () => {
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
           </li>
-          <p className="title1">USEFUL</p>
+          <p className="title1">BOOKINGS</p>
           <li>
             <InsertChartIcon className="icon" />
             <span>Stats</span>
@@ -66,26 +66,26 @@ const Siderbar = () => {
             <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
           </li>
-          <p className="title1">SERVICE</p>
+          <p className="title1">REPORTS</p>
           <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon1" />
+            <SettingsSystemDaydreamOutlinedIcon className="icon" />
             <span>System Health</span>
           </li>
           <li>
-            <PsychologyOutlinedIcon className="icon1" />
+            <PsychologyOutlinedIcon className="icon" />
             <span>Logs</span>
           </li>
           <li>
-            <SettingsApplicationsIcon className="icon1" />
+            <SettingsApplicationsIcon className="icon" />
             <span>Settings</span>
           </li>
-          <p className="title1">USER</p>
+          <p className="title1">SELF</p>
           <li>
-            <AccountCircleOutlinedIcon className="icon1" />
+            <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
           <li>
-            <ExitToAppIcon className="icon1" />
+            <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
         </ul>

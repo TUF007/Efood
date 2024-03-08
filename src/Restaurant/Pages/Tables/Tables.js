@@ -125,7 +125,7 @@ const Tables = () => {
 
   return (
     <>
-      <Paper elevation={3} className='tablecontainer'>
+      <Box className='tablecontainer'>
         <div style={{ display: 'flex', justifyContent: 'center',alignItems:'center' }}>
           <Paper elevation={6} className='tablepaper' >
             <Box
@@ -136,20 +136,20 @@ const Tables = () => {
               noValidate
               autoComplete="off"
             >
-              <div>
-              <FormControl fullWidth >
-                <TextField id="outlined-basic" label="Table" variant="outlined"  className='tablenumber' value={table} onChange={(event) => setTable(event.target.value)} />
+              <div style={{marginRight:"200px"}}>
+              <FormControl >
+                <TextField sx={{width:"400px"}} id="outlined-basic" label="Table" variant="outlined"  className='tablenumber' value={table} onChange={(event) => setTable(event.target.value)} />
              </FormControl>
               </div>
 
             </Box>
-            <div>
-            <Button component="label" variant="contained" className="tablebutton" startIcon={<CloudUploadIcon />} >
+            <div style={{marginRight:"20px",marginTop:"20px"}}>
+            <Button sx={{width:"400px"}} component="label" variant="contained" className="tablebutton" startIcon={<CloudUploadIcon />} >
               Upload Table Photo
               <VisuallyHiddenInput type="file" onChange={handlePhotoSelect} />
             </Button>
           </div>
-            <div>
+          <div style={{marginRight:"20px",marginTop:"20px"}}>
               <Stack direction="row" spacing={2}>
                 <Button variant="contained" className='tablesub' onClick={() => InsertData(updatetableID)}>submit</Button>
               </Stack>
@@ -193,9 +193,7 @@ const Tables = () => {
             </TableContainer>
           </Paper>
         </Box>
-
-      </Paper>
-
+        </Box>
     </>
   )
 }
