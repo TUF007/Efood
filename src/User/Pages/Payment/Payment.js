@@ -10,7 +10,9 @@ import './Payment.css'
 
 import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../../DB/Firebase'
 
 
 
@@ -51,6 +53,8 @@ function a11yProps(index) {
 
 const Payment = () => {
   const navigate = useNavigate()
+  const {Bid} = useParams()
+
   const [value, setValue] = React.useState(0);
   // const [card, setCard] = useState("")
   const [orderId, setOrderId] = useState("")
@@ -74,6 +78,47 @@ const Payment = () => {
     setState((prev) => ({ ...prev, focus: e.target.name }));
   };
 
+  const updateStatus = async () => {
+
+  
+    const docRef = doc(db, 'booking', Bid);
+
+    try {
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        // Extract existing data from the document
+        const data = {
+          propertyId: docSnap.id,
+          ...docSnap.data(),
+        };
+
+        console.log('Existing data:', data);
+
+        const updatedData = {
+          ...data,
+          status: 2,
+        };
+
+        console.log('Updated data:', updatedData);
+
+        // Update the document with new data
+        await updateDoc(docRef, updatedData);
+
+        console.log('Document updated successfully.');
+
+        // Set state with the new values (assuming setDateVisit and setTimeVisit are defined)
+        // Remove setDateVisit and setTimeVisit if you don't need them
+      } else {
+        console.log('No such document!');
+      }
+    } catch (error) {
+      console.error('Error updating document:', error);
+    }
+  };
+
+  // Call the function to update only the status
+  updateStatus();
 
 
 
@@ -164,8 +209,13 @@ const Payment = () => {
                       </Stack>
 
                       <Button
-                        type='submit'
-                        variant='outlined' sx={{ margin: "0 auto", display: "block", mt: 3, px: 5, fontSize: "18px" }}>Pay Now</Button>
+                        type='submit' // Change the type to 'button' to prevent form submission
+                        variant='outlined'
+                        sx={{ margin: "0 auto", display: "block", mt: 3, px: 5, fontSize: "18px" }}
+                        onClick={updateStatus} // Call the updateStatus function on button click
+                      >
+                        Pay Now
+                      </Button>
                     </form>
                   </div>
                 </Box>

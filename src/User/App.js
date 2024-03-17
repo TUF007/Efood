@@ -99,7 +99,7 @@ function App() {
               <Route path="/ViewTable/:Id" element={<ViewTable />} /> 
               <Route path="/ViewMenu" element={<ViewMenu  fetchFoodForBooking={fetchFoodForBooking}/>} /> 
               <Route path="/ViewCart" element={<ViewCart  />} /> 
-              <Route path="/Payment" element={<Payment />} /> 
+              <Route path="/Payment/:Bid" element={<Payment />} /> 
             </Routes>
           </Box>
           {

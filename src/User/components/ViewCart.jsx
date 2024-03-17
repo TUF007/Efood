@@ -14,15 +14,14 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { Await, Link } from 'react-router-dom';
 
 const ViewCart = () => {
-
     const today = dayjs();
     const yesterday = dayjs().subtract(1, 'day');
     const todayStartOfTheDay = today.startOf('day');
-
     const [CardData, setCartData] = useState([])
     const [check, setCheck] = useState(false)
     const [dateVisit, setDateVisit] = useState('')
-    const [timeVist, setTimeVisit] = useState('')
+    const [timeVisit, setTimeVisit] = useState('')
+    const [booking, setBooking] = useState('')
 
 
     const Uid = sessionStorage.getItem('uid')
@@ -40,6 +39,8 @@ const ViewCart = () => {
             // If an existing booking is found, get its bookingId
             const existingBooking = existingBookingSnapshot.docs[0];
             const bookingId = existingBooking.id;
+            setBooking(bookingId)
+
 
 
             // Fetch all food items associated with the bookingId
@@ -88,49 +89,60 @@ const ViewCart = () => {
 
 
     const addDateAndTime = async () => {
-        const docRef = doc(db, 'booking');
-      
-        try {
-          const docSnap = await getDoc(docRef);
-      
-          if (docSnap.exists()) {
-            const data = {
-              propertyId: docSnap.id,
-              ...docSnap.data(),
-            };
-            console.log(data);
-            
-            // Add date and time to the data
-            const currentDate = new Date();
-      
-            // Format date and time as needed
-            const dateVisit = currentDate.toISOString().split('T')[0];
-            const timeVisit = currentDate.toISOString().split('T')[1].slice(0, 5);
-      
-            const updatedData = {
-              ...data,
-              dateVisit,
-              timeVisit,
-              status: 1,
-            };
-      
-            console.log(updatedData);
-      
-            // Update the document with new data
-            await updateDoc(docRef, updatedData);
-      
-            // Set state with the new values
-            setDateVisit(dateVisit);
-            setTimeVisit(timeVisit);
-          } else {
-            console.log('No such document!');
-          }
-        } catch (error) {
-          console.error('Error updating document:', error);
-        }
-      };
-      
 
+        collection(db, 'booking');
+        // Assuming db is properly initialized
+    
+        if (!booking) {
+            console.error('Invalid booking ID. Please make sure booking is properly initialized.');
+            return;
+        }
+    
+        const docRef = doc(db, 'booking', booking);
+    
+        try {
+            const docSnap = await getDoc(docRef);
+    
+            if (docSnap.exists()) {
+                // Extract existing data from the document
+                const data = {
+                    propertyId: docSnap.id,
+                    ...docSnap.data(),
+                };
+    
+                console.log('Existing data:', data);
+    
+                const updatedData = {
+                    ...data,
+                    dateVisit,
+                    timeVisit,
+                    status:1,
+                };
+    
+                console.log('Updated data:', updatedData);
+    
+                // Update the document with new data
+                await updateDoc(docRef, updatedData);
+    
+                console.log('Document updated successfully.');
+    
+                // Set state with the new values (assuming setDateVisit and setTimeVisit are defined)
+                setDateVisit(dateVisit);
+                setTimeVisit(timeVisit);
+            } else {
+                console.log('No such document!');
+            }
+        } catch (error) {
+            console.error('Error updating document:', error);
+        }
+    };
+    
+
+    const handlePlaceOrder = async () => {
+        // Call the addDateAndTime function when the button is clicked
+        await addDateAndTime();
+        // Additional logic if needed
+    };
 
     useEffect(() => {
         fetchFoodForBooking()
@@ -195,9 +207,10 @@ const ViewCart = () => {
                         </LocalizationProvider>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <Link to={'/User/Payment'}>
-
-                            <Button size='large' sx={{ px: 3, m: 3 }} variant='contained'>Place Order</Button>
+                        <Link to={`/User/Payment/${booking}`}>
+                            <Button size='large' sx={{ px: 3, m: 3 }} variant='contained' onClick={handlePlaceOrder}>
+                                Place Order
+                            </Button>
                         </Link>
                     </Box>
                 </>)}
