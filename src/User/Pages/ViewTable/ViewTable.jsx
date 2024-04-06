@@ -22,6 +22,7 @@ const ViewTable = () => {
         console.log(data);
         setShowrestaurant(data);
       } else {
+        
         console.log('No such document!');
       }
   
