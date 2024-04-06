@@ -5,6 +5,7 @@ import { Avatar, Box, Button, Card, CardContent, FormControl, Grid, InputLabel, 
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import { Link } from 'react-router-dom';
 const Viewrestaurant = ({searchRestaurant}) => {
+  console.log(searchRestaurant);
   const [showrestaurant, setShowRestaurant] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showdistrict, setShowDistrict] = useState([]);
@@ -252,8 +253,7 @@ const Viewrestaurant = ({searchRestaurant}) => {
                   </Typography>
                 </CardContent>
                 <Link to={`/User/ViewTable/${row.restaurantId}`} >
-
-                <Button variant="contained" style={{ marginLeft: '130px' }}>
+                <Button variant="contained" style={{ marginLeft: '100px' }}>
                   Book<RestaurantIcon />
                 </Button>
                 </Link>

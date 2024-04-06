@@ -142,8 +142,10 @@ const Post = ({ props }) => {
           </div>
         }
         title={props.userInfo.name}
+
         subheader={props.timeAgo}
       />
+     
 
       <CardMedia
         component="img"

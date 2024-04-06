@@ -82,7 +82,7 @@ const Feed = ({ search }) => {
     fetchData()
   }, [search])
   return (
-    <Box>
+    <Box bgcolor={"#FBF9F1"}>
       {loading ? (
         <Stack spacing={1}>
           <Skeleton variant="text" height={100} />

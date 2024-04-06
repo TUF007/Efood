@@ -83,11 +83,12 @@ function App() {
   });
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box bgcolor={"#FBF9F1"} color={"text.primary"} sx={{height:'200vh'}}>
+      <Box bgcolor={"#FBF9F1"} color={"text.primary"} sx={{minHeight:'200vh'}}>
         <Navbar setSearch={setSearch} setSearchRestaurant={setSearchRestaurant} />
         <Stack direction="row" spacing={2} justifyContent="space-between">
           <Sidebar setMode={setMode} mode={mode} />
-          <Box flex={6} p={{ xs: 0, md: 2}}>
+          <Box flex={6}  bgcolor={"#FBF9F1"} >
+           
             <Routes>
               <Route path="/Viewrestaurant" element={<Viewrestaurant searchRestaurant={searchRestaurant} />} />
               <Route path="/" element={<Feed search={search} />} />

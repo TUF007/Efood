@@ -16,7 +16,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 const Siderbar = () => {
   return (
-    <div className='sidebar'>
+    <div className='sidebar' style={{ overflowY: 'auto', height: '100vh' }}>
       <div className="top">
       <Avatar className='avatar' alt="Paimon Logo" src={image} />
       <span className="logo">E-FOOD</span>

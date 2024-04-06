@@ -89,6 +89,19 @@ const ViewCart = () => {
 
 
     const addDateAndTime = async () => {
+        if (!dateVisit || !timeVisit) {
+            console.error('Date and time must be selected.');
+            return;
+        }
+    
+        const selectedDateTime = dayjs(`${dateVisit} ${timeVisit}`, 'DD-MM-YYYY HH:mm:ss');
+    
+        if (selectedDateTime.isBefore(dayjs())) {
+            console.error('Selected date and time cannot be in the past.');
+            return;
+        }
+
+        
 
         collection(db, 'booking');
         // Assuming db is properly initialized
@@ -149,7 +162,7 @@ const ViewCart = () => {
     }, [])
 
     return (
-        <Card position="fixed" width={350} display="flex" flexDirection="column" gap="10px" >
+        <Card position="fixed" width={350}   display="flex" flexDirection="column" gap="10px" >
             <Typography variant="h5" fontWeight={500} textAlign={'center'} sx={{ p: 3 }}>
                 Cart
             </Typography>

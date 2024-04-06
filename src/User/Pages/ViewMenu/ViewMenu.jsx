@@ -320,7 +320,7 @@ const ViewMenu = ({fetchFoodForBooking}) => {
                                     <Typography color="textSecondary" gutterBottom>
                                         {row.description}
                                     </Typography>
-                                    <Typography>
+                                    <Typography style={{ fontSize: "larger" }}>
                                         Price: {row.foodprice}
                                     </Typography>
                                 </CardContent>
