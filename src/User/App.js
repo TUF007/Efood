@@ -98,7 +98,7 @@ function App() {
               <Route path="/Myprofile" element={<Myprofile />} /> 
               <Route path="/Changepassword" element={<Changepassword />} /> 
               <Route path="/ViewTable/:Id" element={<ViewTable />} /> 
-              <Route path="/ViewMenu" element={<ViewMenu  fetchFoodForBooking={fetchFoodForBooking}/>} /> 
+              <Route path="/ViewMenu/:Tid" element={<ViewMenu  fetchFoodForBooking={fetchFoodForBooking}/>} /> 
               <Route path="/ViewCart" element={<ViewCart  />} /> 
               <Route path="/Payment/:Bid" element={<Payment />} /> 
             </Routes>

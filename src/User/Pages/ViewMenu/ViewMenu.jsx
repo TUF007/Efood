@@ -5,14 +5,17 @@ import { db } from '../../../DB/Firebase';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import { Link, useParams } from 'react-router-dom';
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
-const ViewMenu = ({fetchFoodForBooking}) => {
+import { addDoc, collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+const ViewMenu = ({ fetchFoodForBooking }) => {
+    const { Tid } = useParams()
+
     const [showcategory, setShowcategory] = useState([]);
     const [showtype, setShowtype] = useState([]);
     const [type, setType] = useState('');
     const [category, setCategory] = useState('');
     const [showfood, setShowfood] = useState([]);
     const Uid = sessionStorage.getItem('uid')
+    
 
     const fetchCategory = async () => {
 
@@ -195,7 +198,6 @@ const ViewMenu = ({fetchFoodForBooking}) => {
 
     }
 
-
     const BookingCart = async (Id) => {
         const BookingCollection = collection(db, 'booking');
         const CartCollection = collection(db, 'cart');
@@ -220,14 +222,15 @@ const ViewMenu = ({fetchFoodForBooking}) => {
             // If no existing booking is found, create a new booking and add to cart
             const data = {
                 userId: Uid,
-                status: 0
+                status: 0,
+                table: Tid,
             }
 
             const response = await addDoc(BookingCollection, data);
 
             const cartdata = {
                 bookingId: response.id,
-                foodId: Id
+                foodId: Id,
             }
 
             const cartResponse = await addDoc(CartCollection, cartdata);
@@ -242,6 +245,7 @@ const ViewMenu = ({fetchFoodForBooking}) => {
         fetchType()
         fetchCategory()
         fetchFood()
+        
     }, [])
 
     return (

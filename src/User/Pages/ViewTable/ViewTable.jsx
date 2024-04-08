@@ -84,7 +84,7 @@ const ViewTable = () => {
                 {row.table}
               </Typography>
             </CardContent>
-            <Link to={`/User/ViewMenu/`} >
+            <Link to={`/User/ViewMenu/${row.tableId}`} >
 
             <Button variant="contained" style={{ marginLeft: '100px' }}>
               Menu<RestaurantMenuIcon />

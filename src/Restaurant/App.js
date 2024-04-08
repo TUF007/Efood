@@ -7,6 +7,7 @@ import Sidebar from './Components/Sidebar/Sidebar'
 import { Route, Routes } from 'react-router-dom'
 import "../Restaurant/Pages/Home/Home.css"
 import Navbar from './Components/Navbar/Navbar'
+import Booking from './Pages/Booking/Booking'
 const App = () => {
   return (
     <div className={ "app"}>
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/Food" element={<Food />} />
             <Route path="/Menu" element={<Menu />} />
             <Route path="/Tables" element={<Table />} />
+            <Route path="/Booking" element={<Booking />} />
           </Routes>
         </div>
       </div>

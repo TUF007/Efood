@@ -1,10 +1,10 @@
-import { Box, Button, Paper, TextField } from '@mui/material'
+import { Box, Button, Paper, TextField,Typography } from '@mui/material'
 import React, { useState } from 'react'
 import "./Login.css";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../DB/Firebase'
 import { collection, doc, getDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate()
@@ -90,7 +90,14 @@ const Login = () => {
             />
           </div>
           <div className='sigdiv' ><Button variant="contained" className='sigbutton' onClick={InsertData} >sign in</Button></div>
-
+          
+          {/* <Typography
+          endDecorator={<Link href="/sign-up">Sign up</Link>}
+          fontSize="sm"
+          sx={{ alignSelf: 'center' }}
+        >
+          Don&apos;t have an account?
+        </Typography> */}
         </Box>
       </Paper>
     </Paper>

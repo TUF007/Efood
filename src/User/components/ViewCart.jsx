@@ -22,9 +22,9 @@ const ViewCart = () => {
     const [dateVisit, setDateVisit] = useState('')
     const [timeVisit, setTimeVisit] = useState('')
     const [booking, setBooking] = useState('')
-
-
     const Uid = sessionStorage.getItem('uid')
+
+   
 
     const fetchFoodForBooking = async () => {
         const BookingCollection = collection(db, 'booking');
