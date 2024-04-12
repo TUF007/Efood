@@ -41,23 +41,23 @@ const Sidebar = () => {
           </ListItem>
 
           <ListItem disablePadding>
-            <Link to="/User/Myprofile" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <ListItemButton sx={{ padding: '10px' }}>
-                <ListItemIcon sx={{ color: 'white' }}>
-                  <AccountBox />
-                </ListItemIcon>
-                <ListItemText primary="Profile" sx={{ color: 'white' }} />
-              </ListItemButton>
-            </Link>
-          </ListItem>
-
-          <ListItem disablePadding>
             <Link to="/User/ViewCart" style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemButton sx={{ padding: '10px' }}>
                 <ListItemIcon sx={{ color: 'white' }}>
                   <ShoppingCartIcon />
                 </ListItemIcon>
                 <ListItemText primary="Cart" sx={{ color: 'white' }} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+
+          <ListItem disablePadding>
+            <Link to="/User/Myprofile" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItemButton sx={{ padding: '10px' }}>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <AccountBox />
+                </ListItemIcon>
+                <ListItemText primary="Profile" sx={{ color: 'white' }} />
               </ListItemButton>
             </Link>
           </ListItem>

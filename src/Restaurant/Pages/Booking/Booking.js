@@ -15,38 +15,40 @@ const Booking = () => {
   
   const fetchBooking = async () => {
     const docSnap = await getDocs(query(collection(db, 'booking')));
-    const docSnap1 = await getDocs(query(collection(db,'user' )));
-    const docSnap2 = await getDocs(query(collection(db,'cart' )));
-    const docSnap3 = await getDocs(query(collection(db,'table' )));
+    const docSnap1 = await getDocs(query(collection(db, 'user')));
+    const docSnap2 = await getDocs(query(collection(db, 'cart')));
+    const docSnap3 = await getDocs(query(collection(db, 'food')));
 
- if (docSnap.docs.length > 0 && docSnap1.docs.length > 0 && docSnap2.docs.length > 0 
-    && docSnap3.docs.length > 0) {
-      const userData = docSnap1.docs.map((doc) => ({
-        userId: doc.id,
-        ...doc.data(),
-      }));
-	 const bookingData = docSnap.docs.map((doc) => ({
-        bookingId: doc.id,
-        ...doc.data(),
-      }));
-      const tableData = docSnap.docs.map((doc) => ({
-        tableId: doc.id,
-        ...doc.data(),
-      }));
-      const cartData = docSnap.docs.map((doc) => ({
-        cartId: doc.id,
-        ...doc.data(),
-      }));
+    if (docSnap.docs.length > 0 && docSnap1.docs.length > 0 && docSnap2.docs.length > 0 && docSnap3.docs.length > 0) {
+        const userData = docSnap1.docs.map((doc) => ({
+            userId: doc.id,
+            ...doc.data(),
+        }));
+        const bookingData = docSnap.docs.map((doc) => ({
+            bookingId: doc.id,
+            ...doc.data(),
+        }));
 
-    console.log(docSnap.docs[0].data());
+        const cartData = docSnap2.docs.map((doc) => ({
+            cartId: doc.id,
+            ...doc.data(),
+        }));
 
-     const joinedData = bookingData
-    .filter((booking) => userData.some((user) => booking.userId === user.id))
-    .map((booking) => ({
-      ...booking,
-      userInfo: userData.find((user) => booking.userId === user.id),
-    }));
+        const foodData = docSnap3.docs.map((doc) => ({
+            foodId: doc.id,
+            ...doc.data(),
+        }));
 
+        const joinedData = bookingData
+            .filter((booking) => userData.some((user) => booking.userId == user.id))
+            .filter((booking) => cartData.some((cart) => booking.bookingId == cart.bookingId))
+            .filter((booking) => foodData.some((food) => cartData.some((cart) => cart.foodId == food.foodId)))
+            .map((booking) => ({
+                ...booking,
+                userInfo: userData.find((user) => booking.userId == user.id),
+                cartInfo: cartData.find((cart) => booking.bookingId === cart.bookingId),
+                foodInfo: foodData.find((food) => cartData.some((cart) => cart.foodId == food.foodId)),
+            }));
       console.log(joinedData);
       setShowBooking(joinedData);
     } else {
@@ -97,9 +99,10 @@ const Booking = () => {
                         {key + 1}
                       </TableCell>
                       <TableCell>{row.userInfo.name}</TableCell>
-                       <TableCell>tyui</TableCell>
+                       <TableCell>{row.foodInfo.name}</TableCell>
                       <TableCell>{row.dateVisit}</TableCell>
                       <TableCell>{row.timeVisit}</TableCell>
+                      <TableCell>table no</TableCell>
                       {/* <TableCell align='center' ><Button onClick={() => Deletedata(row.propertyId)}>Delete</Button></TableCell> */}
                     </TableRow>
                   ))}
