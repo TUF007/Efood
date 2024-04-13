@@ -1,62 +1,62 @@
-.regcontainer{
+.regcontainer1{
     width:100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.regpaper{
-    height: 800px;
-    width: 700px;
+.regpaper1{
+    height: 700px;
+    width: 600px;
     display: flex;
     justify-content: center;
     align-items:center;
 }
-.sig1div{
+.sig1div1{
     margin-top:20px ;
     display: flex;
     justify-content: center;
     align-items:center;
 }
-.user{
+.user1{
     font-size: x-large;
     display: flex;
     justify-content: center;
     align-items:center;   
 }
-.email{
+.email1{
     width:100px;
 }
-.distselect{
+.distselect1{
     padding-top: 20px;
     display: flex;
     justify-content: center;
     align-items:center;   
 }
-.placeselect{
+.placeselect1{
     padding-top: 20px;
     display: flex;
     justify-content: center;
     align-items:center; 
    
 }
-.proof{
+.proof1{
     display: flex;
     justify-content: center;
     align-items:center;
     padding-top:20px;
 }
-.proofbutton
+.proofbutton1
 {
     width: 97%;
 }
-.photo{
+.photo1{
     display: flex;
     justify-content: center;
     align-items:center;
     padding-top:20px;
 }
-.photobutton
+.photobutton1
 {
     width: 100%;
 }

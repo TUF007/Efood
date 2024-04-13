@@ -154,8 +154,8 @@ const Restaurantregistration = () => {
 
     return (
         (
-            <Paper elevation={3} className='regcontainer'>
-                <Paper elevation={6} className='regpaper' >
+            <Paper elevation={3} className='regcontainer1'>
+                <Paper elevation={6} className='regpaper1' >
 
                     <Box
                         component="form"
@@ -165,8 +165,8 @@ const Restaurantregistration = () => {
                         noValidate
                         autoComplete="off"
                     >
-                        <div className='user'>RESTAURANT REGISTRATION</div>
-                        <div className='name'>
+                        <div className='user1'>RESTAURANT REGISTRATION</div>
+                        <div className='name1'>
                             <TextField
                                 required
                                 id="standard-required"
@@ -176,7 +176,7 @@ const Restaurantregistration = () => {
                                 onChange={(event) => setName(event.target.value)}
                             />
                         </div>
-                        <div className='email'>
+                        <div className='email1'>
                             <TextField
                                 required
                                 id="standard-required"
@@ -186,20 +186,20 @@ const Restaurantregistration = () => {
                                 onChange={(event) => setEmail(event.target.value)}
                             />
                         </div>
-                        <div className='photo'>
-                            <Button component="label" variant="contained" className="photobutton" startIcon={<CloudUploadIcon />} >
+                        <div className='photo1'>
+                            <Button component="label" variant="contained" className="photobutton1" startIcon={<CloudUploadIcon />} >
                                 Upload photo
                                 <VisuallyHiddenInput type="file" onChange={handlePhotoSelect} />
                             </Button>
                         </div>
-                        <div className='proof'>
-                            <Button component="label" variant="contained" className="proofbutton" startIcon={<CloudUploadIcon />} >
+                        <div className='proof1'>
+                            <Button component="label" variant="contained" className="proofbutton1" startIcon={<CloudUploadIcon />} >
                                 Upload Proof
                                 <VisuallyHiddenInput type="file" onChange={handleProofSelect} />
                             </Button>
                         </div>
                         
-                        <div className='distselect'>
+                        <div className='distselect1'>
                             <FormControl fullWidth variant="standard">
                                 <InputLabel id="demo-simple-select-label">District</InputLabel>
                                 <Select
@@ -223,7 +223,7 @@ const Restaurantregistration = () => {
                                 </Select>
                             </FormControl>
                         </div>
-                        <div className='placeselect'>
+                        <div className='placeselect1'>
                             <FormControl fullWidth variant="standard" >
                                 <InputLabel id="demo-simple-select-label">Place</InputLabel>
                                 <Select
@@ -243,7 +243,7 @@ const Restaurantregistration = () => {
                                 </Select>
                             </FormControl>
                         </div>
-                        <div className='password'>
+                        <div className='password1'>
                             <TextField
                                 required
                                 id="standard-password-input"
@@ -254,7 +254,7 @@ const Restaurantregistration = () => {
                                 onChange={(event) => setPassword(event.target.value)}
                             />
                         </div>
-                        <div className='conpassword'>
+                        <div className='conpassword1'>
                             <TextField
                                 required
                                 id="standard-password-input"
@@ -264,7 +264,7 @@ const Restaurantregistration = () => {
                                 variant="standard"
                             />
                         </div>
-                        <div className='sig1div' ><Button variant="contained" type='reset' style={{ marginRight: '10px' }} onClick={CancelData}>cancel</Button>
+                        <div className='sig1div1' ><Button variant="contained" type='reset' style={{ marginRight: '10px' }} onClick={CancelData}>cancel</Button>
                             <Button variant="contained" onClick={InsertData} >sign in</Button>
                         </div>
 

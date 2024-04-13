@@ -53,32 +53,24 @@ const Siderbar = () => {
             <span>Tables</span>
           </li>
           </Link>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
-          </li>
+         
           <p className="title1">BOOKINGS</p>
+          <Link to={'/Restaurant/Booking'} style={{textDecoration:'none'}}>
           <li>
             <InsertChartIcon className="icon" />
-            <span>Stats</span>
+            <span>Booking</span>
           </li>
-          <li>
-            <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
-          </li>
+          </Link>
           <p className="title1">REPORTS</p>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>System Health</span>
+            <span>Complaint</span>
           </li>
           <li>
             <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
+            <span>Review</span>
           </li>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
-          </li>
+      
           <p className="title1">SELF</p>
           <Link to={'/Restaurant/Myprofile'} style={{textDecoration:'none'}}>
           <li>
@@ -86,6 +78,18 @@ const Siderbar = () => {
             <span>Profile</span>
           </li>
           </Link>
+          
+          <li>
+            <AccountCircleOutlinedIcon className="icon" />
+            <span>Edit Profile</span>
+          </li>
+          
+          
+          <li>
+            <AccountCircleOutlinedIcon className="icon" />
+            <span>Change password</span>
+          </li>
+          
           <li>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
