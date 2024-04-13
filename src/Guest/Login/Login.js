@@ -59,48 +59,52 @@ const Login = () => {
   }
   return (
     <Paper elevation={3} className='logcontainer'>
-      <Paper elevation={6} className='logpaper' >
+    <Paper elevation={6} className='logpaper'>
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '50ch' },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <div className='login'>LOGIN</div>
+        <div className='email'>
+          <TextField
+            required
+            id="standard-basic"
+            label="Email"
+            variant="standard"
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </div>
+        <div className='password'>
+          <TextField
+            required
+            id="standard-password-input"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            variant="standard"
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </div>
+        <div className='sigdiv'>
+          <Button variant="contained" className='sigbutton' onClick={InsertData}>sign in</Button>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+  <Typography fontSize="sm">
+    Don't have an account? <Link  to={'/Userregistration'}>Sign up</Link>
+  </Typography>
+  <Typography fontSize="sm">
+    Not a user? <Link  to={'/Restregistration'}>Sign up</Link>
+  </Typography>
+</div>
 
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '50ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <div className='login'>LOGIN</div>
-          <div className='email'>
-            <TextField
-              required
-              id="standard-basic"
-              label="Email"
-              variant="standard"
-              onChange={(event) => setEmail(event.target.value)} />
-          </div>
-          <div className='password'>
-            <TextField
-              required
-              id="standard-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              variant="standard"
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </div>
-          <div className='sigdiv' ><Button variant="contained" className='sigbutton' onClick={InsertData} >sign in</Button></div>
-          
-          {/* <Typography
-          endDecorator={<Link href="/sign-up">Sign up</Link>}
-          fontSize="sm"
-          sx={{ alignSelf: 'center' }}
-        >
-          Don&apos;t have an account?
-        </Typography> */}
-        </Box>
-      </Paper>
+      </Box>
     </Paper>
+  </Paper>
+  
   )
 }
 

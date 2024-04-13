@@ -77,7 +77,8 @@ const Restaurantregistration = () => {
                   place,
                   email,
                   photo: url1,
-                  proof: url2
+                  proof: url2,
+                  id: uid,
             });
             
             

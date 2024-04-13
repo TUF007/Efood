@@ -1,9 +1,10 @@
 .sidebar {
-    flex: 1;
+  flex: 1.5;
     border-right: 0.5px solid rgb(230, 227, 227);
-    min-height: 100vh;
+    height: 96vh;
     background-color: white;
-  
+    overflow-y: scroll;
+    
     .top {
       height: 50px;
       display: flex;

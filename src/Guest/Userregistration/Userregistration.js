@@ -29,6 +29,8 @@ const Userregistration = () => {
   const [place, setPlace] = useState('');
   const [showplace, setShowPlace] = useState([]);
   const [photo, setPhoto] = useState([]);
+  const [bio, setBio] = useState('');
+  const [No, setNo] = useState('');
 
 
 
@@ -80,7 +82,9 @@ const Userregistration = () => {
         password,
         place,
         email,
-        photo: url
+        photo: url,
+        bio,
+        No,
       });
       
       
@@ -105,6 +109,9 @@ const Userregistration = () => {
     setAge('')
     setGender('')
     setDistrict('')
+    setBio('')
+    setNo('')
+    setPlace('')
   }
 
   const fetchDistrict = async () => {
@@ -199,6 +206,16 @@ const Userregistration = () => {
               onChange={(event) => setEmail(event.target.value)}
             />
           </div>
+          <div className='bio'>
+            <TextField
+              required
+              id="standard-required"
+              label="Bio"
+              type='text'
+              variant="standard"
+              onChange={(event) => setBio(event.target.value)}
+            />
+          </div>
           <div className='age'>
             <TextField
               required
@@ -207,6 +224,16 @@ const Userregistration = () => {
               type='int'
               variant="standard"
               onChange={(event) => setAge(event.target.value)}
+            />
+          </div>
+          <div className='Num'>
+            <TextField
+              required
+              id="standard-required"
+              label="Phone No"
+              type='int'
+              variant="standard"
+              onChange={(event) => setNo(event.target.value)}
             />
           </div>
           <div className='gender'>
@@ -295,7 +322,7 @@ const Userregistration = () => {
             />
           </div>
           <div className='sig1div' ><Button variant="contained" type='reset' style={{ marginRight: '10px' }} onClick={CancelData}>cancel</Button>
-            <Button variant="contained" onClick={InsertData} >sign in</Button>
+            <Button variant="contained" onClick={InsertData} >sign up</Button>
           </div>
 
 

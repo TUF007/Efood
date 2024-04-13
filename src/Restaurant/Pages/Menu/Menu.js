@@ -12,6 +12,7 @@ const Menu = () => {
   const [menu, setMenu] = useState('');
   const [showmenu, setShowmenu] = useState([]);
   const [updatemenuID, setupdateMenuID] = useState('');
+  const restid = sessionStorage.getItem('rid');
 
   useEffect(() => {
 
@@ -41,6 +42,7 @@ const Menu = () => {
   const InsertData = async (Id) => {
     const data = {
       menu,
+      restaurant_id: restid,
     }
 
     if (Id) {

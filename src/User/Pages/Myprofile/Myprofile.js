@@ -10,12 +10,6 @@ const Myprofile = () => {
     const [showuser, setShowuser] = useState([]);
     const [showpost, setShowpost] = useState([]);
     const userid = sessionStorage.getItem('uid')
-    const [showDeleteOption, setShowDeleteOption] = useState(false);
-    
-    const handleButtonClick = () => {
-      setShowDeleteOption(!showDeleteOption);
-    };
-   
     const fetchData = async () => {
 
         const docSnap = await getDocs(query(collection(db, 'user'), where("id", "==", userid)));
@@ -47,6 +41,7 @@ const Myprofile = () => {
 const Deletedata = async (id) => {
 
   await deleteDoc(doc(db, "post", id));
+  fetchPost()
 
 }
       useEffect(() => {
@@ -87,7 +82,7 @@ const Deletedata = async (id) => {
     >
       <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>My Profile</h3>
       <h1 style={{ fontSize: "40px", marginBottom: "25px" }}>{row.name}</h1>
-      <h2 style={{ fontSize: "30px", marginBottom: "20px" }}>bio</h2>
+      <h2 style={{ fontSize: "30px", marginBottom: "20px" }}>{row.bio}</h2>
       <h3 style={{ fontSize: "20px" }}>{row.email}</h3>
     </Box>
   </div>
@@ -102,7 +97,7 @@ const Deletedata = async (id) => {
       <Grid container spacing={3}>
   {showpost.map((row, key) => (
     <Grid key={key + 1} item xs={12} sm={6} md={4}>
-      <Card style={{ marginBottom: '20px', width: '100%', height: '500px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
+      <Card style={{ marginBottom: '20px', width: '100%', height: '450px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
         <CardContent>
           <Avatar
             src={row.photo}
@@ -114,16 +109,9 @@ const Deletedata = async (id) => {
         </CardContent>
         <CardActions>
           <div>
-            {userid === row.id && (
-              <IconButton aria-label="settings" onClick={handleButtonClick}>
-                <ArrowBackIosNewIcon />
-              </IconButton>
-            )}
-            {showDeleteOption && (
-              <IconButton aria-label="delete" onClick={() => Deletedata(row.postId)}>
+              <IconButton aria-label="delete" onClick={() => Deletedata(row.propertyId)}>
                 <DeleteOutlineIcon />
               </IconButton>
-            )}
           </div>
         </CardActions>
         <CardContent>

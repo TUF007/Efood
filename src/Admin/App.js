@@ -11,6 +11,7 @@ import "../Admin/Pages/Home/Home.css"
 import Navbar from './Components/Navbar/Navbar'
 import Viewrestaurant from './Pages/Viewrestaurant/Viewrestaurant'
 import Viewcomplaint from './Pages/Viewcomplaint/Viewcomplaint'
+import { Box } from '@mui/material'
 const App = () => {
  
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Sidebar />
         <div className="homeContainer">
           <Navbar />
+          <Box sx={{overflowY:'scroll',height:600}}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/District' element={<District />} />
@@ -29,6 +31,7 @@ const App = () => {
             <Route path='/viewrestaurant' element={<Viewrestaurant />} />
             <Route path='/viewcomplaint' element={<Viewcomplaint />} />
           </Routes>
+          </Box>
         </div>
       </div>
 

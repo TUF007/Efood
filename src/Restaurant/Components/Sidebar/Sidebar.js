@@ -80,10 +80,12 @@ const Siderbar = () => {
             <span>Settings</span>
           </li>
           <p className="title1">SELF</p>
+          <Link to={'/Restaurant/Myprofile'} style={{textDecoration:'none'}}>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
+          </Link>
           <li>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>

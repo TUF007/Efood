@@ -296,7 +296,7 @@ const Food = () => {
                           {key + 1}
                         </TableCell>
                         <TableCell>{row.name}</TableCell>
-                        <TableCell>{row.description}</TableCell>
+                        <TableCell sx={{width:250}}>{row.description}</TableCell>
                         <TableCell><Avatar src={row.photo}/></TableCell>
                         <TableCell>{row.categoryInfo.category}</TableCell>
                         <TableCell>{row.typeInfo.foodtype}</TableCell>

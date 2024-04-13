@@ -8,6 +8,8 @@ import { Route, Routes } from 'react-router-dom'
 import "../Restaurant/Pages/Home/Home.css"
 import Navbar from './Components/Navbar/Navbar'
 import Booking from './Pages/Booking/Booking'
+import Myprofile from './Pages/Myprofile/Myprofile'
+import { Box } from '@mui/material'
 const App = () => {
   return (
     <div className={ "app"}>
@@ -15,13 +17,18 @@ const App = () => {
         <Sidebar />
         <div className="homeContainer">
           <Navbar />
+          <Box sx={{overflowY:'scroll',height:600}}>
+
+
           <Routes>
             <Route path='/Home' element={<Home />} />
             <Route path="/Food" element={<Food />} />
             <Route path="/Menu" element={<Menu />} />
             <Route path="/Tables" element={<Table />} />
             <Route path="/Booking" element={<Booking />} />
+            <Route path="/Myprofile" element={<Myprofile />} />
           </Routes>
+          </Box>
         </div>
       </div>
 
