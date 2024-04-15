@@ -10,6 +10,7 @@ import Navbar from './Components/Navbar/Navbar'
 import Booking from './Pages/Booking/Booking'
 import Myprofile from './Pages/Myprofile/Myprofile'
 import { Box } from '@mui/material'
+import ViewFood from './Pages/ViewFood/ViewFood'
 const App = () => {
   return (
     <div className={ "app"}>
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/Tables" element={<Table />} />
             <Route path="/Booking" element={<Booking />} />
             <Route path="/Myprofile" element={<Myprofile />} />
+            <Route path="/ViewFood/:Id" element={<ViewFood />} />
           </Routes>
           </Box>
         </div>

@@ -15,7 +15,7 @@ import { Await, Link } from 'react-router-dom';
 
 const ViewCart = () => {
     const today = dayjs();
-    const yesterday = dayjs().subtract(1, 'day');
+    const yesterday = dayjs().add(1, 'day');
     const todayStartOfTheDay = today.startOf('day');
     const [CardData, setCartData] = useState([])
     const [check, setCheck] = useState(false)
@@ -23,6 +23,7 @@ const ViewCart = () => {
     const [timeVisit, setTimeVisit] = useState('')
     const [booking, setBooking] = useState('')
     const Uid = sessionStorage.getItem('uid')
+    
 
    
 
@@ -193,21 +194,22 @@ const ViewCart = () => {
                             >
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                                     <div style={{ marginTop: "30px" }}>
-                                        <DemoItem label="Date">
-                                            <DatePicker
-                                                sx={{ width: "450px" }}
-                                                defaultValue={yesterday}
-                                                disablePast
-                                                views={['year', 'month', 'day']}
-                                                onChange={(event) => setDateVisit(event.format('DD-MM-YYYY'))}
-                                            />
-                                        </DemoItem>
+                                    <DemoItem label="Date">
+    <DatePicker
+        sx={{ width: "450px" }}
+        defaultValue={yesterday}
+        disablePast
+        views={['year', 'month', 'day']}
+        onChange={(event) => setDateVisit(event.format('DD-MM-YYYY'))}
+    />
+</DemoItem>
+
                                     </div>
                                     <div style={{ marginTop: "30px" }}>
                                         <DemoItem label="Time">
                                             <TimePicker
                                                 sx={{ width: "450px" }}
-                                                defaultValue={todayStartOfTheDay} disablePast
+                                                
                                                 onChange={(event) => setTimeVisit(event.format('HH:mm:ss'))}
 
                                             />

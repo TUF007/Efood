@@ -1,9 +1,10 @@
-import { collection, deleteDoc, doc, getDocs, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, query, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { db } from '../../../DB/Firebase';
 import { Avatar, Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 const Booking = () => {
-
+const navigate = useNavigate()
   const [showbooking, setShowBooking] = useState([]);
   useEffect(() => {
 
@@ -18,8 +19,9 @@ const Booking = () => {
     const docSnap1 = await getDocs(query(collection(db, 'user')));
     const docSnap2 = await getDocs(query(collection(db, 'cart')));
     const docSnap3 = await getDocs(query(collection(db, 'food')));
+    const docSnap4 = await getDocs(query(collection(db, 'table')));
 
-    if (docSnap.docs.length > 0 && docSnap1.docs.length > 0 && docSnap2.docs.length > 0 && docSnap3.docs.length > 0) {
+    if (docSnap.docs.length > 0 && docSnap1.docs.length > 0 && docSnap2.docs.length > 0 && docSnap3.docs.length > 0 && docSnap4.docs.length > 0) {
         const userData = docSnap1.docs.map((doc) => ({
             userId: doc.id,
             ...doc.data(),
@@ -38,15 +40,22 @@ const Booking = () => {
             foodId: doc.id,
             ...doc.data(),
         }));
+        const tableData = docSnap4.docs.map((doc) => ({
+          tableId: doc.id,
+          ...doc.data(),
+      }));
+
 
         const joinedData = bookingData
             .filter((booking) => userData.some((user) => booking.userId == user.id))
             .filter((booking) => cartData.some((cart) => booking.bookingId == cart.bookingId))
+            .filter((booking) => tableData.some((table) => booking.table == table.tableId))
             .filter((booking) => foodData.some((food) => cartData.some((cart) => cart.foodId == food.foodId)))
             .map((booking) => ({
                 ...booking,
                 userInfo: userData.find((user) => booking.userId == user.id),
                 cartInfo: cartData.find((cart) => booking.bookingId === cart.bookingId),
+                tableInfo: tableData.find((table) => booking.table === table.tableId),
                 foodInfo: foodData.find((food) => cartData.some((cart) => cart.foodId == food.foodId)),
             }));
       console.log(joinedData);
@@ -56,12 +65,29 @@ const Booking = () => {
     }
 
  }
-//  const Deletedata = async (id) => {
+ const acceptBooking = async (id) => {
+  const washingtonRef = doc(db, "booking", id);
 
-//   await deleteDoc(doc(db, "restuarant", id));
-//   fetchRestaurant();
-// }
+// Set the "capital" field of the city 'DC'
+await updateDoc(washingtonRef, {
+  status: 3
+});
+navigate(`/Restaurant/Viewfood/${id}`)
 
+  fetchBooking();
+}
+
+
+const rejectBooking = async (id) => {
+
+  const washingtonRef = doc(db, "booking", id);
+
+  // Set the "capital" field of the city 'DC'
+  await updateDoc(washingtonRef, {
+    status: 4
+  });
+    fetchBooking();
+}
   return (
     <>
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -102,8 +128,10 @@ const Booking = () => {
                        <TableCell>{row.foodInfo.name}</TableCell>
                       <TableCell>{row.dateVisit}</TableCell>
                       <TableCell>{row.timeVisit}</TableCell>
-                      <TableCell>table no</TableCell>
-                      {/* <TableCell align='center' ><Button onClick={() => Deletedata(row.propertyId)}>Delete</Button></TableCell> */}
+                      <TableCell>{row.tableInfo.table}</TableCell>
+                      <TableCell align='center' ><Button onClick={() => acceptBooking(row.bookingId)}>Accept</Button>
+                      <Button onClick={() => rejectBooking(row.bookingId)}>Reject</Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

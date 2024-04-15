@@ -10,7 +10,8 @@ const Login = () => {
   const navigate = useNavigate()
 
   const UserCollection = collection(db, 'user');
-  const ResturantCollection = collection(db, '/restaurant');
+  const ResturantCollection = collection(db, 'restaurant');
+  const AdminCollection = collection(db, 'admin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -25,6 +26,10 @@ const Login = () => {
   
       const docRef2 = doc(ResturantCollection, Id);
       const docSnap2 = await getDoc(docRef2);
+
+      
+      const docRef3 = doc(AdminCollection, Id);
+      const docSnap3 = await getDoc(docRef3);
       
       console.log(docSnap2);
       if (docSnap1.exists()) {
@@ -34,6 +39,10 @@ const Login = () => {
       else if(docSnap2.exists() ){
         sessionStorage.setItem("rid",Id)
         navigate('../../Restaurant')
+      }
+      else if(docSnap3.exists() ){
+        sessionStorage.setItem("aid",Id)
+        navigate('../../Admin')
       }
       else {
         // docSnap.data() will be undefined in this case
