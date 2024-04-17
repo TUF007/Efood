@@ -4,6 +4,8 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import PasswordIcon from '@mui/icons-material/Password';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import InsertChartIcon from "@mui/icons-material/InsertChart";
+import EditIcon from '@mui/icons-material/Edit';
 const Sidebar = () => {
   return (
     <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" }, backgroundColor: "#FBF9F1" }}>
@@ -52,12 +54,34 @@ const Sidebar = () => {
           </ListItem>
 
           <ListItem disablePadding>
+            <Link to="/User/Booking" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItemButton sx={{ padding: '10px' }}>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <InsertChartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Booking" sx={{ color: 'white' }} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+
+          <ListItem disablePadding>
             <Link to="/User/Myprofile" style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemButton sx={{ padding: '10px' }}>
                 <ListItemIcon sx={{ color: 'white' }}>
                   <AccountBox />
                 </ListItemIcon>
                 <ListItemText primary="Profile" sx={{ color: 'white' }} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+
+          <ListItem disablePadding>
+            <Link to="/User/Editprofile" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItemButton sx={{ padding: '10px' }}>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <EditIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Edit Profile" sx={{ color: 'white' }} />
               </ListItemButton>
             </Link>
           </ListItem>

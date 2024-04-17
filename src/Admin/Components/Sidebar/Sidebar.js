@@ -16,7 +16,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 const Siderbar = () => {
   return (
-    <div className='sidebar' style={{ overflowY: 'auto', height: '100vh' }}>
+    <div className='sidebar' >
       <div className="top">
       <Avatar className='avatar' alt="Paimon Logo" src={image} />
       <span className="logo">E-FOOD</span>
@@ -63,10 +63,12 @@ const Siderbar = () => {
           </li>
           </Link>
           <p className="title">USER</p>
+          <Link to={'/Admin/post'} style={{textDecoration:'none'}}>
           <li>
             <CheckBoxOutlineBlankIcon className="icon" />
             <span>Posts</span>
           </li>
+          </Link>
           <li>
             <NotificationsNoneIcon className="icon" />
             <span>Reports</span>
@@ -87,10 +89,12 @@ const Siderbar = () => {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
+          <Link to={'/'} style={{textDecoration:'none'}}>
           <li>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
+          </Link>
         </ul>
       </div>
       {/* <div className="bottom">

@@ -12,6 +12,7 @@ import Navbar from './Components/Navbar/Navbar'
 import Viewrestaurant from './Pages/Viewrestaurant/Viewrestaurant'
 import Viewcomplaint from './Pages/Viewcomplaint/Viewcomplaint'
 import { Box } from '@mui/material'
+import Post from './Pages/Post/Post'
 const App = () => {
  
   return (
@@ -30,6 +31,7 @@ const App = () => {
             <Route path='/Foodtype' element={<Foodtype />} />
             <Route path='/viewrestaurant' element={<Viewrestaurant />} />
             <Route path='/viewcomplaint' element={<Viewcomplaint />} />
+            <Route path='/post' element={<Post />} />
           </Routes>
           </Box>
         </div>

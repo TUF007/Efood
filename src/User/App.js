@@ -18,6 +18,7 @@ import { db } from "../DB/Firebase";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import ViewCart from "./Components/ViewCart";
 import Payment from "./Pages/Payment/Payment";
+import Booking from "./Pages/Booking/Booking";
 
 
 function App() {
@@ -83,11 +84,11 @@ function App() {
   });
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box bgcolor={"#FBF9F1"} color={"text.primary"} sx={{minHeight:'200vh'}}>
+      <Box bgcolor={"#FBF9F1"} color={"text.primary"} >
         <Navbar setSearch={setSearch} setSearchRestaurant={setSearchRestaurant} />
         <Stack direction="row" spacing={2} justifyContent="space-between">
           <Sidebar setMode={setMode} mode={mode} />
-          <Box flex={6}  bgcolor={"#FBF9F1"} >
+          <Box flex={6}  bgcolor={"#FBF9F1"} sx={{height:600,overflowY:'scroll'}}>
            
             <Routes>
               <Route path="/Viewrestaurant" element={<Viewrestaurant searchRestaurant={searchRestaurant} />} />
@@ -101,6 +102,8 @@ function App() {
               <Route path="/ViewMenu/:Tid" element={<ViewMenu  fetchFoodForBooking={fetchFoodForBooking}/>} /> 
               <Route path="/ViewCart" element={<ViewCart  />} /> 
               <Route path="/Payment/:Bid" element={<Payment />} /> 
+              <Route path="/Payment/:Bid" element={<Payment />} /> 
+              <Route path="/Booking" element={<Booking />} /> 
             </Routes>
           </Box>
           {

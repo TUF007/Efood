@@ -46,8 +46,14 @@ const Restaurantregistration = () => {
 
     
     const InsertData = async () => {
+
+        if (!name || !email || !password ||  !district || !place || !photo || !proof  ) {
+            alert("Please fill in all required fields.");
+            return;
+          }
+      
         
-        try {
+        try { 
             const metadata1 = {
                   contentType: 'image/jpeg'
               };
@@ -80,7 +86,7 @@ const Restaurantregistration = () => {
                   proof: url2,
                   id: uid,
             });
-            
+            alert("Profile created successfully!");
             
           } catch (error) {
             const errorCode = error.code;
@@ -89,9 +95,9 @@ const Restaurantregistration = () => {
           console.log(errorMessage);
           if(errorCode === "auth/email-already-in-use")
           {
-            alert("Already Exist")
+            alert(" Email already Exist")
           }
-      
+         
           }
       
          

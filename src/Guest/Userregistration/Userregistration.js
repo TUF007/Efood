@@ -18,8 +18,7 @@ const Userregistration = () => {
 
 
   const UserCollection = collection(db, 'user');
-  const [first, setFirst] = useState('');
-  const [last, setLast] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [age, setAge] = useState('');
   const [email, setEmail] = useState('');
@@ -30,7 +29,7 @@ const Userregistration = () => {
   const [showplace, setShowPlace] = useState([]);
   const [photo, setPhoto] = useState([]);
   const [bio, setBio] = useState('');
-  const [No, setNo] = useState('');
+  const [no, setNo] = useState('');
 
 
 
@@ -58,6 +57,18 @@ const Userregistration = () => {
 
   const InsertData = async () => {
 
+    if (!name || !email || !password || !age || !gender || !district || !place || !photo || !bio || !no) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+
+    if (no.length !== 10 || isNaN(Number(no))) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+
     try {
       const metadata = {
         contentType: 'image/jpeg'
@@ -76,7 +87,7 @@ const Userregistration = () => {
   
       await setDoc(doc(UserCollection,uid), {
         id: uid,
-        name: first + " " + last,
+        name,
         age,
         gender,
         password,
@@ -84,9 +95,10 @@ const Userregistration = () => {
         email,
         photo: url,
         bio,
-        No,
+        no,
       });
-      
+      alert("Profile created successfully!");
+            
       
     } catch (error) {
       const errorCode = error.code;
@@ -103,8 +115,8 @@ const Userregistration = () => {
    
   }
   const CancelData = () => {
-    setFirst('')
-    setLast('')
+    
+    setName('')
     setPassword('')
     setAge('')
     setGender('')
@@ -180,13 +192,13 @@ const Userregistration = () => {
             <TextField
               required
               id="standard-required"
-              label="First Name"
+              label="Name"
               type='text'
               variant="standard"
-              onChange={(event) => setFirst(event.target.value)}
+              onChange={(event) => setName(event.target.value)}
             />
           </div>
-          <div className='name'>
+          {/* <div className='name'>
             <TextField
               required
               id="standard-required"
@@ -195,7 +207,7 @@ const Userregistration = () => {
               variant="standard"
               onChange={(event) => setLast(event.target.value)}
             />
-          </div>
+          </div> */}
           <div className='email'>
             <TextField
               required

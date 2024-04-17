@@ -29,12 +29,11 @@ const Changepassword = () => {
       justifyContent: "center",
       alignItems: "center",
       flexDirection: "column",
-      width: "40rem",
-      height: "40rem",
+      width: "35rem",
+      height: "30rem",
       margin: "auto",
       marginTop: "40px",
       border: "1px solid black",
-      backgroundColor: "#FBF9F1",
       borderRadius: "10px",
     }}>
       <Box sx={{

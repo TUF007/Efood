@@ -1,49 +1,54 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Navbar.css";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
-import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-import { Avatar } from '@mui/material';
+import { AppBar, Avatar,  Box, InputBase, Menu, MenuItem, styled, Toolbar, Typography } from '@mui/material'
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../../DB/Firebase';
 
 const Navbar = () => {
+
+  const RestCollection = collection(db, 'restaurant');
+  const [showrest, setShowrest] = useState([]);
+  const restid = sessionStorage.getItem('rid')
+
+  const fetchData = async () => {
+
+    const docSnap = await getDocs(query(RestCollection, where("id", "==", restid)));
+    if (docSnap.docs.length > 0) {
+      const data = docSnap.docs.map((doc) => ({
+        propertyId: doc.id,
+        ...doc.data(),
+      }));
+      console.log(data);
+      setShowrest(data);
+    } else {
+      console.log('No such document!');
+    }
+
+
+
+  }
+  useEffect(() => {
+
+
+    fetchData()
+  }, [])
   return (
     <div className="navbar1">
-      <div className="wrapper1">
-        <div className="search1">
-          <input type="text" placeholder="Search..." />
-          <SearchOutlinedIcon />
-        </div>
-        <div className="items1">
-          <div className="item1">
-            <LanguageOutlinedIcon className="icon" />
-            English
-          </div>
-         
-          <div className="item1">
-            <FullscreenExitOutlinedIcon className="icon1" />
-          </div>
-          <div className="item1">
-            <NotificationsNoneOutlinedIcon className="icon1" />
-            <div className="counter1">1</div>
-          </div>
-          <div className="item1">
-            <ChatBubbleOutlineOutlinedIcon className="icon1" />
-            <div className="counter1">2</div>
-          </div>
-          <div className="item1">
-            <ListOutlinedIcon className="icon1" />
-          </div>
-          <div className="item1">
-          <Avatar src="/broken-image.jpg" 
-              className="avatar1"
-            />
-          </div>
-        </div>
+    <div className="wrapper1" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div>
+        {showrest.map((row, key) => (
+          <Avatar
+            key={key}
+            sx={{ width: 30, height: 30 }}
+            src={row.photo}
+            className="avatar1"
+          />
+        ))}
       </div>
     </div>
+  </div>
+  
   );
 };
 export default Navbar

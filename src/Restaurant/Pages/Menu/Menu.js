@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Menu.css";
 import { db } from '../../../DB/Firebase';
-import { collection, addDoc, query, getDocs, deleteDoc, doc, updateDoc, getDoc } from 'firebase/firestore'
+import { collection, addDoc, query, getDocs, deleteDoc, doc, updateDoc, getDoc, where } from 'firebase/firestore'
 import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material/';
 
 
@@ -23,7 +23,7 @@ const Menu = () => {
 
   const fetchData = async () => {
 
-    const docSnap = await getDocs(query(collection(db, 'menu')));
+    const docSnap = await getDocs(query(collection(db, 'menu'),where('restaurant_id', '==', restid)));
     if (docSnap.docs.length > 0) {
       const data = docSnap.docs.map((doc) => ({
         propertyId: doc.id,
@@ -144,7 +144,7 @@ const Menu = () => {
                       <TableCell component="th" scope="row">
                         {key + 1}
                       </TableCell>
-                      <TableCell>{row.menu}</TableCell>
+                      <TableCell sx={{width:250}}>{row.menu}</TableCell>
                       <TableCell align='center' ><Button onClick={() => Deletedata(row.propertyId)}>Delete</Button>
                         <Button onClick={() => fetchUpdatedata(row.propertyId)}>Update</Button></TableCell>
                     </TableRow>

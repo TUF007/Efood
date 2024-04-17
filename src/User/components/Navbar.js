@@ -1,7 +1,7 @@
 import { AppBar, Avatar,  Box, InputBase, Menu, MenuItem, styled, Toolbar, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Bento } from "@mui/icons-material";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../DB/Firebase';
 
@@ -130,9 +130,10 @@ const Navbar = ({ setSearch, setSearchRestaurant }) => {
           horizontal: "right",
         }}
       >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <MenuItem>Logout</MenuItem>
+    </Link>
+        
       </Menu>
     </AppBar>
   )

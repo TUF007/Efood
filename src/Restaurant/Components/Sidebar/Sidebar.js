@@ -4,8 +4,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
+import MailIcon from '@mui/icons-material/Mail';
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
@@ -62,10 +61,12 @@ const Siderbar = () => {
           </li>
           </Link>
           <p className="title1">REPORTS</p>
+          <Link to={'/Restaurant/Viewcomplaint'} style={{textDecoration:'none'}}>
           <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>Complaint</span>
+            <MailIcon  className="icon" />
+            <span>Compliants </span>
           </li>
+          </Link>
           <li>
             <PsychologyOutlinedIcon className="icon" />
             <span>Review</span>
@@ -84,16 +85,18 @@ const Siderbar = () => {
             <span>Edit Profile</span>
           </li>
           
-          
+          <Link to={'/Restaurant/Changepassword'} style={{textDecoration:'none'}}>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Change password</span>
           </li>
-          
+          </Link>
+          <Link to={'/'} style={{textDecoration:'none'}}>
           <li>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
+          </Link>
         </ul>
       </div>
       <div className="bottom1">
