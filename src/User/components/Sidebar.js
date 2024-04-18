@@ -6,6 +6,9 @@ import PasswordIcon from '@mui/icons-material/Password';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import EditIcon from '@mui/icons-material/Edit';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import MailIcon from '@mui/icons-material/Mail';
+import FeedbackIcon from '@mui/icons-material/Feedback';
 const Sidebar = () => {
   return (
     <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" }, backgroundColor: "#FBF9F1" }}>
@@ -65,6 +68,17 @@ const Sidebar = () => {
           </ListItem>
 
           <ListItem disablePadding>
+            <Link to="/User/Liked" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItemButton sx={{ padding: '10px' }}>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <FavoriteIcon />
+                </ListItemIcon>
+                <ListItemText primary="favorites" sx={{ color: 'white' }} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+
+          <ListItem disablePadding>
             <Link to="/User/Myprofile" style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemButton sx={{ padding: '10px' }}>
                 <ListItemIcon sx={{ color: 'white' }}>
@@ -96,15 +110,26 @@ const Sidebar = () => {
               </ListItemButton>
             </Link>
           </ListItem>
-
-          {/* <ListItem disablePadding>
-          <ListItemButton component="a" href="#simple-list">
-            <ListItemIcon>
-              <ModeNight />
-            </ListItemIcon>
-            <Switch onChange={e => setMode(mode === "light" ? "dark" : "light")} />
-          </ListItemButton>
-        </ListItem> */}
+          <ListItem disablePadding>
+            <Link to="/User/Complaint" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItemButton sx={{ padding: '10px' }}>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <MailIcon  />
+                </ListItemIcon>
+                <ListItemText primary="Complaint" sx={{ color: 'white' }} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+          <ListItem disablePadding>
+            <Link to="/User/Feedback" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItemButton sx={{ padding: '10px' }}>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <FeedbackIcon />
+                </ListItemIcon>
+                <ListItemText primary="Feedback" sx={{ color: 'white' }} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
         </List>
       </Box>
     </Box>

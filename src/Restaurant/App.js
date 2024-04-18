@@ -12,7 +12,8 @@ import Myprofile from './Pages/Myprofile/Myprofile'
 import { Box } from '@mui/material'
 import ViewFood from './Pages/ViewFood/ViewFood'
 import Changepassword from './Pages/ChangePassword/Changepassword'
-import Viewcomplaint from './Pages/Viewcomplaint/Viewcomplaint'
+import Complaint from './Pages/Complaint/Complaint'
+import Feedback from './Pages/Feedback/Feedback'
 const App = () => {
   return (
     <div className={ "app"}>
@@ -31,7 +32,8 @@ const App = () => {
             <Route path="/Booking" element={<Booking />} />
             <Route path="/Myprofile" element={<Myprofile />} />
             <Route path="/Changepassword" element={<Changepassword />} />
-            <Route path="/Viewcomplaint" element={<Viewcomplaint />} />
+            <Route path="/Complaint" element={<Complaint />} />
+            <Route path="/Feedback" element={<Feedback />} />
             <Route path="/ViewFood/:Id" element={<ViewFood />} />
           </Routes>
           </Box>

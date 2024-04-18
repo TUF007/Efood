@@ -66,7 +66,7 @@ const Myprofile = () => {
       contentType: 'image/jpeg'
     };
 
-    const storageRef = ref(storage, 'images/' + file.name);
+    const storageRef = ref(storage, 'User/Photo/' + file.name);
 
     await uploadBytesResumable(storageRef, file, metadata);
     const url = await getDownloadURL(storageRef).then((downloadURL) => {

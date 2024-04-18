@@ -74,7 +74,7 @@ const Userregistration = () => {
         contentType: 'image/jpeg'
       };
   
-      const storageRef = ref(storage, 'images/' + photo.name);
+      const storageRef = ref(storage, 'User/Photo' + photo.name);
   
       await uploadBytesResumable(storageRef, photo, metadata);
       const url = await getDownloadURL(storageRef).then((downloadURL) => {

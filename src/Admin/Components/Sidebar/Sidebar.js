@@ -2,9 +2,7 @@ import React from 'react'
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import MailIcon from '@mui/icons-material/Mail';
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import FeedbackIcon from '@mui/icons-material/Feedback';
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import "./Sidebar.css";
 import { Avatar } from '@mui/material';
 import image from "../../Logo/paimon.jpg"
@@ -13,6 +11,7 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import PlaceIcon from '@mui/icons-material/Place';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Siderbar = () => {
   return (
@@ -63,16 +62,19 @@ const Siderbar = () => {
           </li>
           </Link>
           <p className="title">USER</p>
+          <Link to={'/Admin/Viewuser'} style={{textDecoration:'none'}}>
+          <li>
+            <PersonIcon className="icon" />
+            <span>Users</span>
+          </li>
+          </Link>
           <Link to={'/Admin/post'} style={{textDecoration:'none'}}>
           <li>
             <CheckBoxOutlineBlankIcon className="icon" />
             <span>Posts</span>
           </li>
           </Link>
-          <li>
-            <NotificationsNoneIcon className="icon" />
-            <span>Reports</span>
-          </li>
+          
           <p className="title">REPORTS</p>
           <Link to={'/Admin/Viewcomplaint'} style={{textDecoration:'none'}}>
           <li>
@@ -80,15 +82,13 @@ const Siderbar = () => {
             <span>Compliants </span>
           </li>
           </Link>
+          <Link to={'/Admin/Viewfeedback'} style={{textDecoration:'none'}}>
           <li>
             <FeedbackIcon className="icon" />
             <span>Feedbacks</span>
           </li>
+          </Link>
           <p className="title">SELF</p>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
           <Link to={'/'} style={{textDecoration:'none'}}>
           <li>
             <ExitToAppIcon className="icon" />
@@ -97,16 +97,6 @@ const Siderbar = () => {
           </Link>
         </ul>
       </div>
-      {/* <div className="bottom">
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
-        ></div>
-      </div> */}
     </div>
   )
 }

@@ -1,25 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Button, Card, CardContent, Stack, TextField } from '@mui/material';
-
-import './Payment.css'
-
+import './Payment.css';
 import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../../../DB/Firebase'
-
-
-
+import { db } from '../../../DB/Firebase';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -50,65 +44,48 @@ function a11yProps(index) {
   };
 }
 
-
 const Payment = () => {
-  const navigate = useNavigate()
-  const {Bid} = useParams()
-
+  const navigate = useNavigate();
+  const { Bid } = useParams();
   const [value, setValue] = React.useState(0);
-  // const [card, setCard] = useState("")
-  const [orderId, setOrderId] = useState("")
-  const [course, setCourse] = useState([])
-  const [user, setUser] = useState([])
-  const [booking, setBooking] = useState([])
-
+  const [orderId, setOrderId] = useState("");
+  const [course, setCourse] = useState([]);
+  const [user, setUser] = useState([]);
+  const [booking, setBooking] = useState([]);
   const [state, setState] = useState({
     number: "",
     name: "",
     expiry: "",
     cvc: "",
-    name: "",
     focus: "",
   });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setState((prev) => ({ ...prev, [name]: value }));
   };
+
   const handleInputFocus = (e) => {
     setState((prev) => ({ ...prev, focus: e.target.name }));
   };
 
   const updateStatus = async () => {
-
-  
     const docRef = doc(db, 'booking', Bid);
-
     try {
       const docSnap = await getDoc(docRef);
-
       if (docSnap.exists()) {
-        // Extract existing data from the document
         const data = {
           propertyId: docSnap.id,
           ...docSnap.data(),
         };
-
         console.log('Existing data:', data);
-
         const updatedData = {
           ...data,
           status: 2,
         };
-
         console.log('Updated data:', updatedData);
-
-        // Update the document with new data
         await updateDoc(docRef, updatedData);
-
         console.log('Document updated successfully.');
-
-        // Set state with the new values (assuming setDateVisit and setTimeVisit are defined)
-        // Remove setDateVisit and setTimeVisit if you don't need them
       } else {
         console.log('No such document!');
       }
@@ -117,25 +94,15 @@ const Payment = () => {
     }
   };
 
-  // Call the function to update only the status
-  updateStatus();
-
-
-
-
-
   return (
     <Box className="userCheckout" sx={{ width: '100%' }}>
-
       <CustomTabPanel value={value} index={0}>
         <Box sx={{ width: "100%", minHeight: "50vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Card sx={{ width: "900px", height: "700px" }}>
             <CardContent>
               <Typography sx={{ color: "#003f88", fontWeight: "bold", fontSize: "30px", textAlign: "center", mt: 3 }} variant='h4'>CHECKOUT</Typography>
               <Typography sx={{ color: "gray", fontSize: "12px", textAlign: "center" }}>Secure Card Payments</Typography>
-
               <Box>
-
                 <Box sx={{ mt: 2, width: "100%" }}>
                   <Cards
                     number={state.number}
@@ -145,8 +112,7 @@ const Payment = () => {
                     focused={state.focus}
                   />
                   <div className="mt-3">
-                    <form  >
-
+                    <form>
                       <TextField
                         sx={{ mt: 3 }}
                         type="number"
@@ -159,10 +125,7 @@ const Payment = () => {
                         required
                         variant='outlined'
                         fullWidth
-                      >
-                      </TextField>
-
-
+                      />
                       <TextField
                         sx={{ mt: 3 }}
                         fullWidth
@@ -173,10 +136,7 @@ const Payment = () => {
                         onChange={handleInputChange}
                         onFocus={handleInputFocus}
                         required
-
-                      ></TextField>
-
-
+                      />
                       <Stack direction={"row"} spacing={3} mt={3} sx={{ justifyContent: "center" }}>
                         <TextField
                           type="number"
@@ -188,10 +148,7 @@ const Payment = () => {
                           onChange={handleInputChange}
                           onFocus={handleInputFocus}
                           required
-
-                        ></TextField>
-
-
+                        />
                         <TextField
                           type="text"
                           name="cvc"
@@ -202,24 +159,19 @@ const Payment = () => {
                           onChange={handleInputChange}
                           onFocus={handleInputFocus}
                           required
-
-
-                        ></TextField>
-
+                        />
                       </Stack>
-
                       <Button
-                        type='submit' // Change the type to 'button' to prevent form submission
+                        type='button' // Change the type to 'button' to prevent form submission
                         variant='outlined'
                         sx={{ margin: "0 auto", display: "block", mt: 3, px: 5, fontSize: "18px" }}
-                        onClick={updateStatus} // Call the updateStatus function on button click
+                        onClick={() => updateStatus()} // Call the updateStatus function on button click
                       >
                         Pay Now
                       </Button>
                     </form>
                   </div>
                 </Box>
-
               </Box>
             </CardContent>
           </Card>
@@ -227,6 +179,6 @@ const Payment = () => {
       </CustomTabPanel>
     </Box>
   );
-}
+};
 
-export default Payment
+export default Payment;

@@ -101,9 +101,9 @@ const Complaint = () => {
   }, [])
   return (
     <>
-      <Paper elevation={3} className='compcontainer'>
-        <div className='common'>
-          <Paper elevation={6} className='comppaper' >
+      
+      <Paper elevation={6} className='comppaper1' style={{ backgroundColor: '#FBF9F1' }}>
+
             <Typography variant="h6" color="text.secondary" style={{ marginBottom: '10px' }}>
               Complaints
             </Typography>
@@ -111,7 +111,7 @@ const Complaint = () => {
             <div className='title'>
               <TextField id="outlined-basic" label="Title" variant="outlined" value={title} onChange={(event) => setTitle(event.target.value)} fullWidth />
             </div>
-            <div className='complaint'>
+            <div className='complaint1'>
               <TextField
                 id="outlined-basic"
                 label="Content"
@@ -125,14 +125,13 @@ const Complaint = () => {
               />
 
             </div>
-            <div className='button'>
+            <div className='button1'>
               <Stack direction="row" spacing={2}>
                 <Button variant="contained" className='compsub' onClick={() => InsertData(updatecomplaintID)}>submit</Button>
                 <Button variant="contained" onClick={() => CancelData()}>cancel</Button>
               </Stack>
             </div>
           </Paper >
-        </div>
         <Box
           display="flex"
           justifyContent="center"
@@ -141,7 +140,7 @@ const Complaint = () => {
         >
           <Paper style={{ marginBottom: '50px' }}>
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <Table sx={{ minWidth: 650, backgroundColor: '#FBF9F1' }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell>Sl. No.</TableCell>
@@ -170,8 +169,6 @@ const Complaint = () => {
             </TableContainer>
           </Paper>
         </Box>
-
-      </Paper>
 
     </>
   )

@@ -10,9 +10,11 @@ import { Route, Routes } from 'react-router-dom'
 import "../Admin/Pages/Home/Home.css"
 import Navbar from './Components/Navbar/Navbar'
 import Viewrestaurant from './Pages/Viewrestaurant/Viewrestaurant'
+import Viewuser from './Pages/Viewuser/Viewuser'
 import Viewcomplaint from './Pages/Viewcomplaint/Viewcomplaint'
 import { Box } from '@mui/material'
 import Post from './Pages/Post/Post'
+import Viewfeedback from './Pages/Viewfeedback/Viewfeedback'
 const App = () => {
  
   return (
@@ -27,10 +29,11 @@ const App = () => {
             <Route path='/District' element={<District />} />
             <Route path='/Place' element={<Place />} />
             <Route path='/Category' element={<Category />} />
-            <Route path='/Subcategory' element={<Subcategory />} />
             <Route path='/Foodtype' element={<Foodtype />} />
             <Route path='/viewrestaurant' element={<Viewrestaurant />} />
+            <Route path='/viewuser' element={<Viewuser />} />
             <Route path='/viewcomplaint' element={<Viewcomplaint />} />
+            <Route path='/viewfeedback' element={<Viewfeedback />} />
             <Route path='/post' element={<Post />} />
           </Routes>
           </Box>

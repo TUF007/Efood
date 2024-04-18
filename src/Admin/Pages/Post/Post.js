@@ -37,15 +37,21 @@ const Deletedata = async (id) => {
         fetchPost()
       }, [])
   return (
+    <>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
+      Posts
+    </Typography>
+  </div>
       <Box
       display="flex"
       justifyContent="center"
-      marginTop="100px"
+      marginTop="20px"
     >
       <Grid container spacing={3}>
   {showpost.map((row, key) => (
     <Grid key={key + 1} item xs={12} sm={6} md={4}>
-      <Card style={{ marginBottom: '20px', width: '100%', height: '450px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
+      <Card style={{ marginTop: '20px', width: '100%', height: '450px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
         <CardContent>
           <Avatar
             src={row.photo}
@@ -75,6 +81,7 @@ const Deletedata = async (id) => {
         ))}
       </Grid>
     </Box>
+    </>
   );
 };
 

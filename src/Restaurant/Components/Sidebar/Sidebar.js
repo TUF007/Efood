@@ -61,17 +61,18 @@ const Siderbar = () => {
           </li>
           </Link>
           <p className="title1">REPORTS</p>
-          <Link to={'/Restaurant/Viewcomplaint'} style={{textDecoration:'none'}}>
+          <Link to={'/Restaurant/Complaint'} style={{textDecoration:'none'}}>
           <li>
             <MailIcon  className="icon" />
-            <span>Compliants </span>
+            <span>Compliant </span>
           </li>
           </Link>
+          <Link to={'/Restaurant/Feedback'} style={{textDecoration:'none'}}>
           <li>
             <PsychologyOutlinedIcon className="icon" />
-            <span>Review</span>
+            <span>Feedback</span>
           </li>
-      
+          </Link>
           <p className="title1">SELF</p>
           <Link to={'/Restaurant/Myprofile'} style={{textDecoration:'none'}}>
           <li>
@@ -79,11 +80,7 @@ const Siderbar = () => {
             <span>Profile</span>
           </li>
           </Link>
-          
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Edit Profile</span>
-          </li>
+    
           
           <Link to={'/Restaurant/Changepassword'} style={{textDecoration:'none'}}>
           <li>
@@ -98,9 +95,6 @@ const Siderbar = () => {
           </li>
           </Link>
         </ul>
-      </div>
-      <div className="bottom1">
-
       </div>
     </div>
   )

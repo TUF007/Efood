@@ -132,10 +132,8 @@ const rejectBooking = async (id) => {
                       <TableCell>{row.tableInfo.table}</TableCell>
                       <TableCell align='center' >
                         
-                        {row.status === 3 ? 'Accepted': row.status === 4 ?'Rejected': row.status === 5 ?'Cancel':''}
-                        
-                        
-                       {row.status !=5 ? <Button onClick={() => acceptBooking(row.bookingId)}>Cancel</Button>:''}
+                        {row.status === 2 ? 'Processing':row.status === 3 ? 'Accepted': row.status === 4 ?'Rejected': row.status === 5 ?'Cancelled':row.status === 1 ?'payment not done-failed':''}  
+                        {row.status !== 5 && row.status !== 1 && row.status !== 3 ? <Button onClick={() => acceptBooking(row.bookingId)}>Cancel</Button> : ''}
                       </TableCell>
                     </TableRow>
                   ))}

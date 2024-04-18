@@ -1,8 +1,22 @@
-import { Avatar, Box } from '@mui/material';
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { CardActions, IconButton, Typography, Avatar, Grid, Card, CardContent, Box } from '@mui/material';
+import { collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../../../DB/Firebase";
+import { db, storage } from "../../../DB/Firebase";
+import EditIcon from '@mui/icons-material/Edit';
+import styled from 'styled-components';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 const Myprofile = () => {
   const [showrest, setShowrest] = useState([]);
@@ -40,11 +54,33 @@ const Myprofile = () => {
     }
   }
 
+  const changeFile = async (event) => {
+    const file = await event.target.files[0]
+    const metadata = {
+      contentType: 'image/jpeg'
+    };
+
+    const storageRef = ref(storage, 'Restaurant/Photo/' + file.name);
+
+    await uploadBytesResumable(storageRef, file, metadata);
+    const url = await getDownloadURL(storageRef).then((downloadURL) => {
+      return downloadURL
+    });
+
+    const washingtonRef = doc(db, "restaurant", restid);
+
+    await updateDoc(washingtonRef, {
+      photo: url
+    });
+    fetchData()
+
+  }
+
+
   useEffect(() => {
 
 
     fetchData()
-
   }, [])
   return (
     <Box
@@ -62,11 +98,22 @@ const Myprofile = () => {
       }}>
         {showrest.map((row, key) => (
           <div key={key} style={{ display: "flex", alignItems: "center" }}>
-            <Avatar
-              alt="profile photo"
-              sx={{ width: "400px", height: "400px", overflow: "hidden" }}
-              src={row.photo}
-            />
+            <IconButton
+                Button
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+                style={{ marginTop: '400px' }} // Adjust the values as needed
+              >
+                <EditIcon />
+                <VisuallyHiddenInput type="file" onChange={changeFile} />
+              </IconButton>
+              <Avatar
+                alt="profile photo"
+                sx={{ width: "400px", height: "400px", overflow: "hidden" }}
+                src={row.photo}
+              />
             <Box
               sx={{
                 display: "flex",

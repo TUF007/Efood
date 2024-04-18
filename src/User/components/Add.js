@@ -4,7 +4,7 @@ import { Add as AddIcon, DateRange,  } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../../DB/Firebase";
-import { addDoc, collection, doc, getDoc, Timestamp } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, Timestamp, updateDoc } from "firebase/firestore";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 const SytledModal = styled(Modal)({
   display: "flex",
@@ -32,31 +32,43 @@ const Add = () => {
     console.log(file);
   };
   const InsertData = async () => {
-    const userid = sessionStorage.getItem('uid')
+    const userid = sessionStorage.getItem('uid');
     const timestamp = Timestamp.now();
     const dateObject = timestamp.toDate();
     const formattedDate = dateObject.toLocaleString();
 
     const metadata = {
-      contentType: 'image/jpeg'
+        contentType: 'image/jpeg'
     };
 
     const storageRef = ref(storage, 'User/Post/' + photo.name);
     await uploadBytesResumable(storageRef, photo, metadata);
-    const url = await getDownloadURL(storageRef).then((downloadURL) => {
-      return downloadURL
-    });
+    const url = await getDownloadURL(storageRef);
 
     const data = {
-      title,
-      description,
-      photo: url,
-      userid,
-      date: formattedDate
+        title,
+        description,
+        photo: url,
+        userid,
+        date: formattedDate
+    };
+
+    try {
+        // Add document to Firestore without ID
+        const docRef = await addDoc(PostCollection, data);
+
+        // Get the auto-generated ID
+        const postId = docRef.id;
+
+        // Update the document with postId included
+        await updateDoc(doc(PostCollection, postId), { postId });
+
+        console.log("Document written with ID: ", postId);
+    } catch (error) {
+        console.error("Error adding document: ", error);
     }
-    const response = await addDoc(PostCollection, data)
-    console.log(response)
-  }
+}
+
   const fetchUpdatedata = async () => {
     const uid = sessionStorage.getItem('uid')
     const docRef = doc(db, 'user', uid);
@@ -86,7 +98,6 @@ const Add = () => {
           position: "fixed",
           bottom: 20,
           left: { xs: "calc(50% - 25px)", md: 30 },
-          bgcolor:"#120D31"
         }}
       >
         <Fab color="primary" aria-label="add">

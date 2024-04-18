@@ -19,6 +19,8 @@ import { collection, doc, getDoc, getDocs, query, where } from "firebase/firesto
 import ViewCart from "./Components/ViewCart";
 import Payment from "./Pages/Payment/Payment";
 import Booking from "./Pages/Booking/Booking";
+import Liked from "./Pages/Liked/Liked";
+import Feedback from "./Pages/Feedback/Feedback";
 
 
 function App() {
@@ -104,6 +106,8 @@ function App() {
               <Route path="/Payment/:Bid" element={<Payment />} /> 
               <Route path="/Payment/:Bid" element={<Payment />} /> 
               <Route path="/Booking" element={<Booking />} /> 
+              <Route path="/Liked" element={<Liked />} /> 
+              <Route path="/Feedback" element={<Feedback />} /> 
             </Routes>
           </Box>
           {

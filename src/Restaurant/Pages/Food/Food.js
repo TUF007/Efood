@@ -1,8 +1,8 @@
-import { Box, Button, Paper, TextField, FormControl, MenuItem, Select, InputLabel, TableBody, TableContainer, Table, TableHead, TableRow, TableCell, Avatar } from '@mui/material'
+import { Box, Button, Paper, TextField, FormControl, MenuItem, Select, InputLabel, TableBody, TableContainer, Table, TableHead, TableRow, TableCell, Avatar, Typography } from '@mui/material'
 import "./Food.css";
 import React, { useEffect, useState } from 'react'
 import { db, storage } from '../../../DB/Firebase'
-import { collection, addDoc, getDocs, query, doc, deleteDoc } from 'firebase/firestore'
+import { collection, addDoc, getDocs, query, doc, deleteDoc, where } from 'firebase/firestore'
 import styled from 'styled-components';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -109,7 +109,7 @@ const Food = () => {
   }
   const fetchFood = async () => {
 
-    const docSnap = await getDocs(query(collection(db, 'food')));
+    const docSnap = await getDocs(query(collection(db, 'food'), where("restaurantId", "==", restid)));
     const docSnap1 = await getDocs(query(collection(db, 'category')));
     const docSnap2 = await getDocs(query(collection(db, 'foodtype')));
     if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
@@ -166,6 +166,11 @@ const Food = () => {
   return (
     (
       <>
+       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
+        Foods
+      </Typography>
+    </div>
         <Box className='foodcontainer'>
           <Paper elevation={6} className='foodpaper' >
 

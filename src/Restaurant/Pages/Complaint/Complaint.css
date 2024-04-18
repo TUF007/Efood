@@ -1,16 +1,23 @@
+.compcontainer {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-.comppaper1 {
+.comppaper {
     height: 450px;
     width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #FBF9F1;
-    margin-left: 200px;
+    margin-top: 50px;
 }
 
-.title1 {
+.title {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,7 +26,7 @@
     gap: 10px;
     padding-top: 10px;
 }
-.complaint1 {
+.complaint {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,6 +34,6 @@
     padding-top: 10px;
     width: 95%;
 }
-.button1{
+.button{
     padding-top: 20px;
 }

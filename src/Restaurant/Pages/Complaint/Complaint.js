@@ -1,37 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import "./Menu.css";
+import "./Complaint.css";
 import { db } from '../../../DB/Firebase';
 import { collection, addDoc, query, getDocs, deleteDoc, doc, updateDoc, getDoc, where } from 'firebase/firestore'
 import { Paper, Box, TextField, Button, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material/';
 
-
-
-const Menu = () => {
-
-
-  const MenuCollection = collection(db, 'menu');
-  const [menu, setMenu] = useState('');
-  const [showmenu, setShowmenu] = useState([]);
-  const [updatemenuID, setupdateMenuID] = useState('');
+const Complaint = () => {
+  const ComplaintCollection = collection(db, 'complaint');
+  const [complaint, setComplaint] = useState('');
+  const [title, setTitle] = useState('');
+  const [showcomplaint, setShowcomplaint] = useState([]);
+  const [updatecomplaintID, setupdateComplaintID] = useState('');
   const restid = sessionStorage.getItem('rid');
-
-  useEffect(() => {
-
-
-    fetchData()
-  }, [])
-
 
   const fetchData = async () => {
 
-    const docSnap = await getDocs(query(collection(db, 'menu'),where('restaurant_id', '==', restid)));
+    const docSnap = await getDocs(query(collection(db, 'complaint'),where('restid','==',restid)));
     if (docSnap.docs.length > 0) {
       const data = docSnap.docs.map((doc) => ({
         propertyId: doc.id,
         ...doc.data(),
       }));
       console.log(data);
-      setShowmenu(data);
+      setShowcomplaint(data);
     } else {
       console.log('No such document!');
     }
@@ -42,29 +32,32 @@ const Menu = () => {
 
   const InsertData = async (Id) => {
     const data = {
-      menu,
-      restaurant_id: restid,
+      complaint,
+      title,
+      restid,
     }
 
     if (Id) {
-      await updateDoc(doc(db, "menu", Id), data);
+      await updateDoc(doc(db, "complaint", Id), data);
       fetchData();
-      setMenu('');
-      setupdateMenuID('');
+      setComplaint('');
+      setTitle('');
+      setupdateComplaintID('');
     }
     else {
-      const response = await addDoc(MenuCollection, data)
+      const response = await addDoc(ComplaintCollection, data)
       console.log(response);
       fetchData()
-      setMenu('');
-      setupdateMenuID('');
+      setComplaint('');
+      setTitle('');
+      setupdateComplaintID('');
     }
 
 
   }
 
   const fetchUpdatedata = async (id) => {
-    const docRef = doc(db, 'menu', id);
+    const docRef = doc(db, 'complaint', id);
 
     try {
       const docSnap = await getDoc(docRef);
@@ -75,10 +68,12 @@ const Menu = () => {
           ...docSnap.data(),
         };
         console.log(data);
-        const value = data.menu;
+        const value = data.complaint;
+        const value1 = data.title;
         const Id = data.propertyId;
-        setMenu(value);
-        setupdateMenuID(Id)
+        setComplaint(value);
+        setTitle(value1);
+        setupdateComplaintID(Id)
 
       } else {
         console.log('No such document!');
@@ -91,37 +86,49 @@ const Menu = () => {
 
   const Deletedata = async (id) => {
 
-    await deleteDoc(doc(db, "menu", id));
+    await deleteDoc(doc(db, "complaint", id));
     fetchData();
   }
+  const CancelData = () => {
+    setTitle('')
+    setComplaint('')
 
+  }
+  useEffect(() => {
+
+
+    fetchData()
+  }, [])
   return (
     <>
-    
-      <Box className='menucontainer'>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
-        Menu
-      </Typography>
-    </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Paper elevation={6} className='menupaper' >
-            <Box
-              component="form"
-              sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <div style={{ marginRight: '25px' }}>
-                <TextField id="outlined-basic" label="Menu" variant="outlined" value={menu} onChange={(event) => setMenu(event.target.value)} />
-              </div>
+      <Paper elevation={3} className='compcontainer'>
+        <div className='common'>
+          <Paper elevation={6} className='comppaper' >
+            <Typography variant="h6" color="text.secondary" style={{ marginBottom: '10px' }}>
+              Complaints
+            </Typography>
 
-            </Box>
-            <div>
+            <div className='title'>
+              <TextField id="outlined-basic" label="Title" variant="outlined" value={title} onChange={(event) => setTitle(event.target.value)} fullWidth />
+            </div>
+            <div className='complaint'>
+              <TextField
+                id="outlined-basic"
+                label="Content"
+                variant="outlined"
+                multiline
+                rows={Math.max(6, complaint.split('\n').length)}  
+                value={complaint}
+                onChange={(event) => setComplaint(event.target.value)}
+                fullWidth
+                style={{ minHeight: '100px' }} 
+              />
+
+            </div>
+            <div className='button'>
               <Stack direction="row" spacing={2}>
-                <Button variant="contained" style={{ marginRight: '43px' }} className='menusub' onClick={() => InsertData(updatemenuID)}>submit</Button>
+                <Button variant="contained" className='compsub' onClick={() => InsertData(updatecomplaintID)}>submit</Button>
+                <Button variant="contained" onClick={() => CancelData()}>cancel</Button>
               </Stack>
             </div>
           </Paper >
@@ -138,12 +145,13 @@ const Menu = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Sl. No.</TableCell>
-                    <TableCell>Menu</TableCell>
+                    <TableCell>Title</TableCell>
+                    <TableCell>Complaint</TableCell>
                     <TableCell align='center' >Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {showmenu.map((row, key) => (
+                  {showcomplaint.map((row, key) => (
                     <TableRow
                       key={key + 1}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -151,7 +159,8 @@ const Menu = () => {
                       <TableCell component="th" scope="row">
                         {key + 1}
                       </TableCell>
-                      <TableCell sx={{width:400}}>{row.menu}</TableCell>
+                      <TableCell>{row.title}</TableCell>
+                      <TableCell>{row.complaint}</TableCell>
                       <TableCell align='center' ><Button onClick={() => Deletedata(row.propertyId)}>Delete</Button>
                         <Button onClick={() => fetchUpdatedata(row.propertyId)}>Update</Button></TableCell>
                     </TableRow>
@@ -162,10 +171,10 @@ const Menu = () => {
           </Paper>
         </Box>
 
-      </Box>
+      </Paper>
 
     </>
   )
 }
 
-export default Menu
+export default Complaint

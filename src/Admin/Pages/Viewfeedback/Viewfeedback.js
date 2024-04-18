@@ -3,12 +3,12 @@ import { db } from '../../../DB/Firebase';
 import { collection,  query, getDocs} from 'firebase/firestore'
 import { Paper, Box,   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography,} from '@mui/material/';
 
-const Viewcomplaint = () => {
-  const [showcomplaintuser, setShowcomplaintuser] = useState([]);
-  const [showcomplaintrest, setShowcomplaintrest] = useState([]);
+const Viewfeedback = () => {
+  const [showfeedbackuser, setShowfeedbackuser] = useState([]);
+  const [showfeedbackrest, setShowfeedbackrest] = useState([]);
 
-  const fetchComplaintuser = async () => {
-    const docSnap = await getDocs(query(collection(db, 'complaint')));
+  const fetchFeedbackuser = async () => {
+    const docSnap = await getDocs(query(collection(db, 'feedback')));
     const docSnap1 = await getDocs(query(collection(db,'user' )));
 
  if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
@@ -16,67 +16,68 @@ const Viewcomplaint = () => {
         userId: doc.id,
         ...doc.data(),
       }));
-	 const ComplaintData = docSnap.docs.map((doc) => ({
-        ComplaintId: doc.id,
+	 const feedbackData = docSnap.docs.map((doc) => ({
+        FeedbackId: doc.id,
         ...doc.data(),
       }));
     console.log(docSnap.docs[0].data());
 
-     const joinedData = ComplaintData
-    .filter((complaint) => userData.some((user) => complaint.userid === user.userId))
-    .map((complaint) => ({
-      ...complaint,
-      userInfo: userData.find((user) => complaint.userid === user.userId),
+     const joinedData = feedbackData
+    .filter((feedback) => userData.some((user) => feedback.userId=== user.userId))
+    .map((feedback) => ({
+      ...feedback,
+      userInfo: userData.find((user) => feedback.userId === user.userId),
     }));
 
       console.log(joinedData);
-      setShowcomplaintuser(joinedData);
+      setShowfeedbackuser(joinedData);
     } else {
       console.log('No such document!');
     }
 
  }
 
- const fetchComplaintrest = async () => {
-  const docSnap = await getDocs(query(collection(db, 'complaint')));
+ const fetchFeedbackrest = async () => {
+  const docSnap = await getDocs(query(collection(db, 'feedback')));
   const docSnap1 = await getDocs(query(collection(db,'restaurant' )));
 
 if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
-    const restaurantData = docSnap1.docs.map((doc) => ({
+    const restData = docSnap1.docs.map((doc) => ({
       restId: doc.id,
       ...doc.data(),
     }));
- const ComplaintData = docSnap.docs.map((doc) => ({
-      ComplaintId: doc.id,
+ const feedbackData = docSnap.docs.map((doc) => ({
+   FeedbackId: doc.id,
       ...doc.data(),
     }));
-  console.log(docSnap.docs[0].data());
+ console.log(docSnap.docs[0].data());
 
-   const joinedData = ComplaintData
-  .filter((complaint) => restaurantData.some((restaurant) => complaint.restid === restaurant.restId))
-  .map((complaint) => ({
-    ...complaint,
-    restInfo: restaurantData.find((restaurant) => complaint.restid === restaurant.restId),
-  }));
+  const joinedData = feedbackData
+ .filter((feedback) => restData.some((restaurant) => feedback.restId=== restaurant.restId))
+ .map((feedback) => ({
+   ...feedback,
+   restInfo: restData.find((restaurant) => feedback.restId=== restaurant.restId),
+ }));
 
-    console.log(joinedData);
-    setShowcomplaintrest(joinedData);
-  } else {
-    console.log('No such document!');
-  }
+   console.log(joinedData);
+   setShowfeedbackrest(joinedData);
+ } else {
+   console.log('No such document!');
+ }
 
-}
-  useEffect(() => {
+};
+
+useEffect(() => {
 
 
-    fetchComplaintuser()
-    fetchComplaintrest()
+    fetchFeedbackuser()
+    fetchFeedbackrest()
   }, [])
   return (
     <>
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
-        Complaints-User
+        feedbacks-User
       </Typography>
     </div>
         <Box
@@ -92,12 +93,11 @@ if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
                   <TableRow>
                     <TableCell>Sl. No.</TableCell>
                     <TableCell>User Name</TableCell>
-                    <TableCell>Title</TableCell>
-                    <TableCell>Complaint</TableCell>
+                    <TableCell>Feedback</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {showcomplaintuser.map((row, key) => (
+                  {showfeedbackuser.map((row, key) => (
                     <TableRow
                       key={key + 1}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -106,9 +106,7 @@ if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
                         {key + 1}
                       </TableCell>
                       <TableCell>{row.userInfo.name}</TableCell>
-                      <TableCell>{row.title}</TableCell>
-                      <TableCell>{row.complaint}</TableCell>
-                      
+                      <TableCell>{row.feedback}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -118,7 +116,7 @@ if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
         </Box>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
-        Complaints-Restaurant
+        feedbacks-Restaurant
       </Typography>
     </div>
         <Box
@@ -134,12 +132,11 @@ if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
                   <TableRow>
                     <TableCell>Sl. No.</TableCell>
                     <TableCell>Restaurant Name</TableCell>
-                    <TableCell>Title</TableCell>
-                    <TableCell>Complaint</TableCell>
+                    <TableCell>Feedback</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {showcomplaintrest.map((row, key) => (
+                  {showfeedbackrest.map((row, key) => (
                     <TableRow
                       key={key + 1}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -148,8 +145,7 @@ if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
                         {key + 1}
                       </TableCell>
                       <TableCell>{row.restInfo.name}</TableCell>
-                      <TableCell>{row.title}</TableCell>
-                      <TableCell>{row.complaint}</TableCell>
+                      <TableCell>{row.feedback}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -161,4 +157,4 @@ if (docSnap.docs.length > 0 && docSnap1.docs.length > 0) {
   )
 }
 
-export default Viewcomplaint
+export default Viewfeedback
