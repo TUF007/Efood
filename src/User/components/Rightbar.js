@@ -72,7 +72,7 @@ const Rightbar = () => {
       borderRadius: "20px",
       border: "1px solid",
       backgroundColor: "#3A3553",
-      height: "590px",
+      height: "780px",
       overflowY: "auto" // or overflowY: "scroll" for always visible scrollbars
     }}
   >

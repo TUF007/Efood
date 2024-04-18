@@ -16,8 +16,8 @@ const Sidebar = () => {
         position="fixed"
         top={100}
         sx={{
-          height: "620px", // Adjust the height according to your needs
-          width: "175px", // Adjust the width according to your needs
+          height: "830px", // Adjust the height according to your needs
+          width: "230px", // Adjust the width according to your needs
           borderRadius: "20px",
           border: "1px solid",
           backgroundColor: "#3A3553",

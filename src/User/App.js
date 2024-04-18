@@ -90,7 +90,7 @@ function App() {
         <Navbar setSearch={setSearch} setSearchRestaurant={setSearchRestaurant} />
         <Stack direction="row" spacing={2} justifyContent="space-between">
           <Sidebar setMode={setMode} mode={mode} />
-          <Box flex={6}  bgcolor={"#FBF9F1"} sx={{height:600,overflowY:'scroll'}}>
+          <Box flex={6}  bgcolor={"#FBF9F1"} sx={{height:850,overflowY:'scroll'}}>
            
             <Routes>
               <Route path="/Viewrestaurant" element={<Viewrestaurant searchRestaurant={searchRestaurant} />} />
