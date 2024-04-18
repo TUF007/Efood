@@ -234,6 +234,7 @@ const ViewMenu = ({ fetchFoodForBooking }) => {
             }
 
             const cartResponse = await addDoc(CartCollection, cartdata);
+            alert('added to cart');
             console.log(cartResponse);
         }
         fetchFoodForBooking()

@@ -85,6 +85,7 @@ const Payment = () => {
         };
         console.log('Updated data:', updatedData);
         await updateDoc(docRef, updatedData);
+        alert('payment done');
         console.log('Document updated successfully.');
       } else {
         console.log('No such document!');

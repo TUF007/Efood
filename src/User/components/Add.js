@@ -56,6 +56,7 @@ const Add = () => {
     try {
         // Add document to Firestore without ID
         const docRef = await addDoc(PostCollection, data);
+        alert('post added');
 
         // Get the auto-generated ID
         const postId = docRef.id;
