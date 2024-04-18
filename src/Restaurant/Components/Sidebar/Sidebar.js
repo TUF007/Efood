@@ -30,7 +30,7 @@ const Siderbar = () => {
 
             <li>
               <DashboardIcon className="icon" />
-              <span>Dashboard</span>
+              <span>Home Page</span>
             </li>
           </Link>
           <p className="title1"></p>

@@ -25,7 +25,7 @@ const App = () => {
           <Navbar />
           <Box sx={{overflowY:'scroll',height:600}}>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/Home' element={<Home />} />
             <Route path='/District' element={<District />} />
             <Route path='/Place' element={<Place />} />
             <Route path='/Category' element={<Category />} />

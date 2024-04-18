@@ -24,7 +24,7 @@ const Siderbar = () => {
         <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <Link to={'/Admin/'} style={{textDecoration:'none'}}>
+          <Link to={'/Admin/Home'} style={{textDecoration:'none'}}>
           <li>
             <DashboardIcon className="icon" />
             <span>Home Page </span>

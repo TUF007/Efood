@@ -45,10 +45,16 @@ const Liked = () => {
   }, []); // Add empty dependency array
 
   return (
+    <>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Typography variant="h3" color="text.secondary" style={{ paddingTop: '20px' }}>
+      Favorites
+    </Typography>
+  </div>
     <Box
       display="flex"
       justifyContent="center"
-      marginTop="100px"
+      marginTop="50px"
     >
       <Grid container spacing={3}>
         {showpost && showpost.map((row, key) => (
@@ -76,6 +82,7 @@ const Liked = () => {
         ))}
       </Grid>
     </Box>
+  </>
   );
 };
 
